@@ -54,5 +54,26 @@ namespace TestDiagram
             comps.Add(comp);
             schematicCanvas.Invalidate();
         }
+
+        private void btnRectangle_Click(object sender, EventArgs e)
+        {
+            Rectangle rect = new Rectangle();
+            comps.Add(rect);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnCircle_Click(object sender, EventArgs e)
+        {
+            Circle circ = new Circle();
+            comps.Add(circ);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnTriangle_Click(object sender, EventArgs e)
+        {
+            Triangle tri = new Triangle();
+            comps.Add(tri);
+            schematicCanvas.Invalidate();
+        }
     }
 }

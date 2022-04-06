@@ -32,6 +32,9 @@ namespace TestDiagram
             this.panelMainMenu = new System.Windows.Forms.Panel();
             this.schematicCanvas = new System.Windows.Forms.PictureBox();
             this.btnCreateComponent = new System.Windows.Forms.Button();
+            this.btnRectangle = new System.Windows.Forms.Button();
+            this.btnCircle = new System.Windows.Forms.Button();
+            this.btnTriangle = new System.Windows.Forms.Button();
             this.panelMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.schematicCanvas)).BeginInit();
             this.SuspendLayout();
@@ -39,6 +42,9 @@ namespace TestDiagram
             // panelMainMenu
             // 
             this.panelMainMenu.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.panelMainMenu.Controls.Add(this.btnTriangle);
+            this.panelMainMenu.Controls.Add(this.btnCircle);
+            this.panelMainMenu.Controls.Add(this.btnRectangle);
             this.panelMainMenu.Controls.Add(this.btnCreateComponent);
             this.panelMainMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelMainMenu.Location = new System.Drawing.Point(0, 0);
@@ -67,6 +73,36 @@ namespace TestDiagram
             this.btnCreateComponent.UseVisualStyleBackColor = true;
             this.btnCreateComponent.Click += new System.EventHandler(this.btnCreateComponent_Click);
             // 
+            // btnRectangle
+            // 
+            this.btnRectangle.Location = new System.Drawing.Point(103, 3);
+            this.btnRectangle.Name = "btnRectangle";
+            this.btnRectangle.Size = new System.Drawing.Size(85, 42);
+            this.btnRectangle.TabIndex = 1;
+            this.btnRectangle.Text = "Rectangle";
+            this.btnRectangle.UseVisualStyleBackColor = true;
+            this.btnRectangle.Click += new System.EventHandler(this.btnRectangle_Click);
+            // 
+            // btnCircle
+            // 
+            this.btnCircle.Location = new System.Drawing.Point(194, 3);
+            this.btnCircle.Name = "btnCircle";
+            this.btnCircle.Size = new System.Drawing.Size(85, 42);
+            this.btnCircle.TabIndex = 2;
+            this.btnCircle.Text = "Circle";
+            this.btnCircle.UseVisualStyleBackColor = true;
+            this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
+            // 
+            // btnTriangle
+            // 
+            this.btnTriangle.Location = new System.Drawing.Point(285, 4);
+            this.btnTriangle.Name = "btnTriangle";
+            this.btnTriangle.Size = new System.Drawing.Size(85, 42);
+            this.btnTriangle.TabIndex = 3;
+            this.btnTriangle.Text = "Triangle";
+            this.btnTriangle.UseVisualStyleBackColor = true;
+            this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
+            // 
             // TestDigramMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -89,6 +125,9 @@ namespace TestDiagram
         private System.Windows.Forms.Panel panelMainMenu;
         private System.Windows.Forms.PictureBox schematicCanvas;
         private System.Windows.Forms.Button btnCreateComponent;
+        private System.Windows.Forms.Button btnRectangle;
+        private System.Windows.Forms.Button btnCircle;
+        private System.Windows.Forms.Button btnTriangle;
     }
 }
 

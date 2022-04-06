@@ -4,19 +4,17 @@ using System.Drawing;
 
 namespace TestDiagram
 {
-    public class Comp
+    class Rectangle : Comp
     {
-        protected Pen pen = new Pen(Color.Black);
-
-        public Comp()
+        public Rectangle()
         {
 
         }
 
-        public virtual void Draw(Graphics gr)
+        public override void Draw(Graphics gr)
         {
             // Draw a simple rectangle with black border and no fill color
-            gr.DrawRectangle(pen, 100, 100, 100, 100);
+            gr.DrawRectangle(pen, 250, 100, 100, 100);
         }
     }
 }
