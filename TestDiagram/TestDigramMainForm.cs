@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TestDiagram
@@ -14,6 +10,9 @@ namespace TestDiagram
     {
         // The grid spacing.
         public const int grid_gap = 10;
+
+        // Create a component list
+        List<Comp> comps = new List<Comp>();
 
         public TestDigramMainForm()
         {
@@ -39,6 +38,21 @@ namespace TestDiagram
         private void schematicCanvas_Resize(object sender, EventArgs e)
         {
             DrawBackgroundGrid();
+        }
+
+        private void schematicCanvas_Paint(object sender, PaintEventArgs e)
+        {
+            foreach(Comp comp in comps)
+            {
+                comp.Draw(e.Graphics);
+            }
+        }
+
+        private void btnCreateComponent_Click(object sender, EventArgs e)
+        {
+            Comp comp = new Comp();
+            comps.Add(comp);
+            schematicCanvas.Invalidate();
         }
     }
 }

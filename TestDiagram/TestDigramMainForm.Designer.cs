@@ -31,12 +31,15 @@ namespace TestDiagram
         {
             this.panelMainMenu = new System.Windows.Forms.Panel();
             this.schematicCanvas = new System.Windows.Forms.PictureBox();
+            this.btnCreateComponent = new System.Windows.Forms.Button();
+            this.panelMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.schematicCanvas)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMainMenu
             // 
             this.panelMainMenu.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.panelMainMenu.Controls.Add(this.btnCreateComponent);
             this.panelMainMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelMainMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMainMenu.Name = "panelMainMenu";
@@ -51,7 +54,18 @@ namespace TestDiagram
             this.schematicCanvas.Size = new System.Drawing.Size(800, 398);
             this.schematicCanvas.TabIndex = 1;
             this.schematicCanvas.TabStop = false;
+            this.schematicCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.schematicCanvas_Paint);
             this.schematicCanvas.Resize += new System.EventHandler(this.schematicCanvas_Resize);
+            // 
+            // btnCreateComponent
+            // 
+            this.btnCreateComponent.Location = new System.Drawing.Point(12, 3);
+            this.btnCreateComponent.Name = "btnCreateComponent";
+            this.btnCreateComponent.Size = new System.Drawing.Size(85, 42);
+            this.btnCreateComponent.TabIndex = 0;
+            this.btnCreateComponent.Text = "Create Component";
+            this.btnCreateComponent.UseVisualStyleBackColor = true;
+            this.btnCreateComponent.Click += new System.EventHandler(this.btnCreateComponent_Click);
             // 
             // TestDigramMainForm
             // 
@@ -64,6 +78,7 @@ namespace TestDiagram
             this.Name = "TestDigramMainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Test Diagram";
+            this.panelMainMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.schematicCanvas)).EndInit();
             this.ResumeLayout(false);
 
@@ -73,6 +88,7 @@ namespace TestDiagram
 
         private System.Windows.Forms.Panel panelMainMenu;
         private System.Windows.Forms.PictureBox schematicCanvas;
+        private System.Windows.Forms.Button btnCreateComponent;
     }
 }
 
