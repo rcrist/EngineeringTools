@@ -51,6 +51,7 @@ namespace TestDiagram
             this.schematicCanvas.Size = new System.Drawing.Size(800, 398);
             this.schematicCanvas.TabIndex = 1;
             this.schematicCanvas.TabStop = false;
+            this.schematicCanvas.Resize += new System.EventHandler(this.schematicCanvas_Resize);
             // 
             // TestDigramMainForm
             // 
