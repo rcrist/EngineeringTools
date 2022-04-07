@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -13,6 +14,11 @@ namespace TestDiagram
 
         // Create a component list
         List<Comp> comps = new List<Comp>();
+
+        // Mouse event attributes
+        bool isMouseDown = false;
+        private Point NewPt1, offset;
+        Comp tempComp = new Comp();
 
         public TestDigramMainForm()
         {
@@ -75,5 +81,65 @@ namespace TestDiagram
             comps.Add(tri);
             schematicCanvas.Invalidate();
         }
+
+        private void schematicCanvas_MouseDown(object sender, MouseEventArgs e)
+        {
+            isMouseDown = true;
+            NewPt1.X = e.X;
+            NewPt1.Y = e.Y;
+
+            // Iterate over the component list and test each to see if it is "hit"
+            foreach (Comp comp in comps)
+            {
+                if (hitTest(comp))
+                {
+                    tempComp = comp;
+                    offset.X = NewPt1.X - comp.loc.X;
+                    offset.Y = NewPt1.Y - comp.loc.Y;
+                }
+            }
+        }
+
+        private void schematicCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown == true)
+            {
+                if (tempComp != null)
+                {
+                    int x = e.X;
+                    int y = e.Y;
+                    tempComp.loc = new Point(x - offset.X, y - offset.Y);
+                    schematicCanvas.Invalidate();
+                }
+            }
+        }
+
+        private void schematicCanvas_MouseUp(object sender, MouseEventArgs e)
+        {
+            isMouseDown = false;
+            tempComp = null;
+        }
+
+        /* **************************** Helper Functions **************************** */
+        private bool hitTest(Comp comp)
+        {
+            bool hit;
+
+            hit = false;
+            Debug.WriteLine("NewPt1: " + NewPt1.ToString());
+            if ((NewPt1.X >= comp.loc.X && NewPt1.X <= comp.loc.X + comp.width) &&
+                (NewPt1.Y >= comp.loc.Y && NewPt1.Y <= comp.loc.Y + comp.height))
+            {
+                Debug.WriteLine("Hit!");
+                hit = true;
+            }
+            else
+            {
+                Debug.WriteLine("No Hit!");
+                hit = false;
+            }
+            return hit;
+        }
+
     }
 }

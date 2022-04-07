@@ -8,13 +8,13 @@ namespace TestDiagram
     {
         public Rectangle()
         {
-
+            loc = new Point(250, 100);
         }
 
         public override void Draw(Graphics gr)
         {
             // Draw a simple rectangle with black border and no fill color
-            gr.DrawRectangle(pen, 250, 100, 100, 100);
+            gr.DrawRectangle(pen, loc.X, loc.Y, width, height);
         }
     }
 }

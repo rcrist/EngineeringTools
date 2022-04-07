@@ -30,11 +30,11 @@ namespace TestDiagram
         private void InitializeComponent()
         {
             this.panelMainMenu = new System.Windows.Forms.Panel();
-            this.schematicCanvas = new System.Windows.Forms.PictureBox();
-            this.btnCreateComponent = new System.Windows.Forms.Button();
-            this.btnRectangle = new System.Windows.Forms.Button();
-            this.btnCircle = new System.Windows.Forms.Button();
             this.btnTriangle = new System.Windows.Forms.Button();
+            this.btnCircle = new System.Windows.Forms.Button();
+            this.btnRectangle = new System.Windows.Forms.Button();
+            this.btnCreateComponent = new System.Windows.Forms.Button();
+            this.schematicCanvas = new System.Windows.Forms.PictureBox();
             this.panelMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.schematicCanvas)).BeginInit();
             this.SuspendLayout();
@@ -52,36 +52,15 @@ namespace TestDiagram
             this.panelMainMenu.Size = new System.Drawing.Size(800, 52);
             this.panelMainMenu.TabIndex = 0;
             // 
-            // schematicCanvas
+            // btnTriangle
             // 
-            this.schematicCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.schematicCanvas.Location = new System.Drawing.Point(0, 52);
-            this.schematicCanvas.Name = "schematicCanvas";
-            this.schematicCanvas.Size = new System.Drawing.Size(800, 398);
-            this.schematicCanvas.TabIndex = 1;
-            this.schematicCanvas.TabStop = false;
-            this.schematicCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.schematicCanvas_Paint);
-            this.schematicCanvas.Resize += new System.EventHandler(this.schematicCanvas_Resize);
-            // 
-            // btnCreateComponent
-            // 
-            this.btnCreateComponent.Location = new System.Drawing.Point(12, 3);
-            this.btnCreateComponent.Name = "btnCreateComponent";
-            this.btnCreateComponent.Size = new System.Drawing.Size(85, 42);
-            this.btnCreateComponent.TabIndex = 0;
-            this.btnCreateComponent.Text = "Create Component";
-            this.btnCreateComponent.UseVisualStyleBackColor = true;
-            this.btnCreateComponent.Click += new System.EventHandler(this.btnCreateComponent_Click);
-            // 
-            // btnRectangle
-            // 
-            this.btnRectangle.Location = new System.Drawing.Point(103, 3);
-            this.btnRectangle.Name = "btnRectangle";
-            this.btnRectangle.Size = new System.Drawing.Size(85, 42);
-            this.btnRectangle.TabIndex = 1;
-            this.btnRectangle.Text = "Rectangle";
-            this.btnRectangle.UseVisualStyleBackColor = true;
-            this.btnRectangle.Click += new System.EventHandler(this.btnRectangle_Click);
+            this.btnTriangle.Location = new System.Drawing.Point(285, 4);
+            this.btnTriangle.Name = "btnTriangle";
+            this.btnTriangle.Size = new System.Drawing.Size(85, 42);
+            this.btnTriangle.TabIndex = 3;
+            this.btnTriangle.Text = "Triangle";
+            this.btnTriangle.UseVisualStyleBackColor = true;
+            this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
             // 
             // btnCircle
             // 
@@ -93,15 +72,39 @@ namespace TestDiagram
             this.btnCircle.UseVisualStyleBackColor = true;
             this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
             // 
-            // btnTriangle
+            // btnRectangle
             // 
-            this.btnTriangle.Location = new System.Drawing.Point(285, 4);
-            this.btnTriangle.Name = "btnTriangle";
-            this.btnTriangle.Size = new System.Drawing.Size(85, 42);
-            this.btnTriangle.TabIndex = 3;
-            this.btnTriangle.Text = "Triangle";
-            this.btnTriangle.UseVisualStyleBackColor = true;
-            this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
+            this.btnRectangle.Location = new System.Drawing.Point(103, 3);
+            this.btnRectangle.Name = "btnRectangle";
+            this.btnRectangle.Size = new System.Drawing.Size(85, 42);
+            this.btnRectangle.TabIndex = 1;
+            this.btnRectangle.Text = "Rectangle";
+            this.btnRectangle.UseVisualStyleBackColor = true;
+            this.btnRectangle.Click += new System.EventHandler(this.btnRectangle_Click);
+            // 
+            // btnCreateComponent
+            // 
+            this.btnCreateComponent.Location = new System.Drawing.Point(12, 3);
+            this.btnCreateComponent.Name = "btnCreateComponent";
+            this.btnCreateComponent.Size = new System.Drawing.Size(85, 42);
+            this.btnCreateComponent.TabIndex = 0;
+            this.btnCreateComponent.Text = "Create Component";
+            this.btnCreateComponent.UseVisualStyleBackColor = true;
+            this.btnCreateComponent.Click += new System.EventHandler(this.btnCreateComponent_Click);
+            // 
+            // schematicCanvas
+            // 
+            this.schematicCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.schematicCanvas.Location = new System.Drawing.Point(0, 52);
+            this.schematicCanvas.Name = "schematicCanvas";
+            this.schematicCanvas.Size = new System.Drawing.Size(800, 398);
+            this.schematicCanvas.TabIndex = 1;
+            this.schematicCanvas.TabStop = false;
+            this.schematicCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.schematicCanvas_Paint);
+            this.schematicCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseDown);
+            this.schematicCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseMove);
+            this.schematicCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseUp);
+            this.schematicCanvas.Resize += new System.EventHandler(this.schematicCanvas_Resize);
             // 
             // TestDigramMainForm
             // 
