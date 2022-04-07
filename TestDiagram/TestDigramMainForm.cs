@@ -41,6 +41,12 @@ namespace TestDiagram
             schematicCanvas.BackgroundImage = bm;
         }
 
+        private void SnapToGrid(ref int x, ref int y)
+        {
+            x = grid_gap * (int)Math.Round((double)x / grid_gap);
+            y = grid_gap * (int)Math.Round((double)y / grid_gap);
+        }
+
         private void schematicCanvas_Resize(object sender, EventArgs e)
         {
             DrawBackgroundGrid();
@@ -85,8 +91,13 @@ namespace TestDiagram
         private void schematicCanvas_MouseDown(object sender, MouseEventArgs e)
         {
             isMouseDown = true;
-            NewPt1.X = e.X;
-            NewPt1.Y = e.Y;
+
+            // Snap the start point to the Grid
+            int x = e.X;
+            int y = e.Y;
+            SnapToGrid(ref x, ref y);
+            NewPt1.X = x;
+            NewPt1.Y = y;
 
             // Iterate over the component list and test each to see if it is "hit"
             foreach (Comp comp in comps)
@@ -108,6 +119,7 @@ namespace TestDiagram
                 {
                     int x = e.X;
                     int y = e.Y;
+                    SnapToGrid(ref x, ref y);
                     tempComp.loc = new Point(x - offset.X, y - offset.Y);
                     schematicCanvas.Invalidate();
                 }
@@ -126,7 +138,6 @@ namespace TestDiagram
             bool hit;
 
             hit = false;
-            Debug.WriteLine("NewPt1: " + NewPt1.ToString());
             if ((NewPt1.X >= comp.loc.X && NewPt1.X <= comp.loc.X + comp.width) &&
                 (NewPt1.Y >= comp.loc.Y && NewPt1.Y <= comp.loc.Y + comp.height))
             {
