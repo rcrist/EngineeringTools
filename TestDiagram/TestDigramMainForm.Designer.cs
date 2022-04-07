@@ -35,6 +35,7 @@ namespace TestDiagram
             this.btnRectangle = new System.Windows.Forms.Button();
             this.btnCreateComponent = new System.Windows.Forms.Button();
             this.schematicCanvas = new System.Windows.Forms.PictureBox();
+            this.btnWireMode = new System.Windows.Forms.Button();
             this.panelMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.schematicCanvas)).BeginInit();
             this.SuspendLayout();
@@ -42,6 +43,7 @@ namespace TestDiagram
             // panelMainMenu
             // 
             this.panelMainMenu.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.panelMainMenu.Controls.Add(this.btnWireMode);
             this.panelMainMenu.Controls.Add(this.btnTriangle);
             this.panelMainMenu.Controls.Add(this.btnCircle);
             this.panelMainMenu.Controls.Add(this.btnRectangle);
@@ -106,6 +108,16 @@ namespace TestDiagram
             this.schematicCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseUp);
             this.schematicCanvas.Resize += new System.EventHandler(this.schematicCanvas_Resize);
             // 
+            // btnWireMode
+            // 
+            this.btnWireMode.Location = new System.Drawing.Point(558, 4);
+            this.btnWireMode.Name = "btnWireMode";
+            this.btnWireMode.Size = new System.Drawing.Size(85, 42);
+            this.btnWireMode.TabIndex = 4;
+            this.btnWireMode.Text = "Wire Mode";
+            this.btnWireMode.UseVisualStyleBackColor = true;
+            this.btnWireMode.Click += new System.EventHandler(this.btnWireMode_Click);
+            // 
             // TestDigramMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -131,6 +143,7 @@ namespace TestDiagram
         private System.Windows.Forms.Button btnRectangle;
         private System.Windows.Forms.Button btnCircle;
         private System.Windows.Forms.Button btnTriangle;
+        private System.Windows.Forms.Button btnWireMode;
     }
 }
 
