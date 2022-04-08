@@ -6,7 +6,7 @@ namespace EngineeringTools.Components
 {
     public class Comp
     {
-        protected Pen pen = new Pen(Color.Black);
+        protected Pen pen = new Pen(Color.White);
 
         // Component location, width, and height attributes
         public Point loc;

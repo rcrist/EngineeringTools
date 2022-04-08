@@ -34,10 +34,10 @@ namespace EngineeringTools
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnCircuit = new System.Windows.Forms.Button();
             this.panelCircuitSubmenu = new System.Windows.Forms.Panel();
-            this.btnNewCircuit = new System.Windows.Forms.Button();
-            this.btnLoadCircuit = new System.Windows.Forms.Button();
-            this.btnStoreCircuit = new System.Windows.Forms.Button();
             this.btnAnalyzeCircuit = new System.Windows.Forms.Button();
+            this.btnStoreCircuit = new System.Windows.Forms.Button();
+            this.btnLoadCircuit = new System.Windows.Forms.Button();
+            this.btnNewCircuit = new System.Windows.Forms.Button();
             this.btnWireMode = new System.Windows.Forms.Button();
             this.panelSideMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.panelCompMenu = new System.Windows.Forms.FlowLayoutPanel();
@@ -85,6 +85,11 @@ namespace EngineeringTools
             this.schematicCanvas.Size = new System.Drawing.Size(1382, 753);
             this.schematicCanvas.TabIndex = 0;
             this.schematicCanvas.TabStop = false;
+            this.schematicCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.schematicCanvas_Paint);
+            this.schematicCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseDown);
+            this.schematicCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseMove);
+            this.schematicCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseUp);
+            this.schematicCanvas.Resize += new System.EventHandler(this.schematicCanvas_Resize);
             // 
             // pictureBox1
             // 
@@ -120,33 +125,19 @@ namespace EngineeringTools
             this.panelCircuitSubmenu.TabIndex = 2;
             this.panelCircuitSubmenu.Visible = false;
             // 
-            // btnNewCircuit
+            // btnAnalyzeCircuit
             // 
-            this.btnNewCircuit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.btnNewCircuit.FlatAppearance.BorderSize = 0;
-            this.btnNewCircuit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.BlueViolet;
-            this.btnNewCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNewCircuit.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewCircuit.Location = new System.Drawing.Point(-6, 1);
-            this.btnNewCircuit.Name = "btnNewCircuit";
-            this.btnNewCircuit.Size = new System.Drawing.Size(200, 40);
-            this.btnNewCircuit.TabIndex = 2;
-            this.btnNewCircuit.Text = "New Circuit";
-            this.btnNewCircuit.UseVisualStyleBackColor = false;
-            // 
-            // btnLoadCircuit
-            // 
-            this.btnLoadCircuit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.btnLoadCircuit.FlatAppearance.BorderSize = 0;
-            this.btnLoadCircuit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.BlueViolet;
-            this.btnLoadCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoadCircuit.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoadCircuit.Location = new System.Drawing.Point(-6, 41);
-            this.btnLoadCircuit.Name = "btnLoadCircuit";
-            this.btnLoadCircuit.Size = new System.Drawing.Size(200, 40);
-            this.btnLoadCircuit.TabIndex = 3;
-            this.btnLoadCircuit.Text = "Load Circuit";
-            this.btnLoadCircuit.UseVisualStyleBackColor = false;
+            this.btnAnalyzeCircuit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.btnAnalyzeCircuit.FlatAppearance.BorderSize = 0;
+            this.btnAnalyzeCircuit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.BlueViolet;
+            this.btnAnalyzeCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAnalyzeCircuit.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAnalyzeCircuit.Location = new System.Drawing.Point(-6, 119);
+            this.btnAnalyzeCircuit.Name = "btnAnalyzeCircuit";
+            this.btnAnalyzeCircuit.Size = new System.Drawing.Size(200, 40);
+            this.btnAnalyzeCircuit.TabIndex = 5;
+            this.btnAnalyzeCircuit.Text = "Analyze Circuit";
+            this.btnAnalyzeCircuit.UseVisualStyleBackColor = false;
             // 
             // btnStoreCircuit
             // 
@@ -162,19 +153,33 @@ namespace EngineeringTools
             this.btnStoreCircuit.Text = "Store Circuit";
             this.btnStoreCircuit.UseVisualStyleBackColor = false;
             // 
-            // btnAnalyzeCircuit
+            // btnLoadCircuit
             // 
-            this.btnAnalyzeCircuit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.btnAnalyzeCircuit.FlatAppearance.BorderSize = 0;
-            this.btnAnalyzeCircuit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.BlueViolet;
-            this.btnAnalyzeCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAnalyzeCircuit.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnalyzeCircuit.Location = new System.Drawing.Point(-6, 119);
-            this.btnAnalyzeCircuit.Name = "btnAnalyzeCircuit";
-            this.btnAnalyzeCircuit.Size = new System.Drawing.Size(200, 40);
-            this.btnAnalyzeCircuit.TabIndex = 5;
-            this.btnAnalyzeCircuit.Text = "Analyze Circuit";
-            this.btnAnalyzeCircuit.UseVisualStyleBackColor = false;
+            this.btnLoadCircuit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.btnLoadCircuit.FlatAppearance.BorderSize = 0;
+            this.btnLoadCircuit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.BlueViolet;
+            this.btnLoadCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoadCircuit.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoadCircuit.Location = new System.Drawing.Point(-6, 41);
+            this.btnLoadCircuit.Name = "btnLoadCircuit";
+            this.btnLoadCircuit.Size = new System.Drawing.Size(200, 40);
+            this.btnLoadCircuit.TabIndex = 3;
+            this.btnLoadCircuit.Text = "Load Circuit";
+            this.btnLoadCircuit.UseVisualStyleBackColor = false;
+            // 
+            // btnNewCircuit
+            // 
+            this.btnNewCircuit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.btnNewCircuit.FlatAppearance.BorderSize = 0;
+            this.btnNewCircuit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.BlueViolet;
+            this.btnNewCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewCircuit.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewCircuit.Location = new System.Drawing.Point(-6, 1);
+            this.btnNewCircuit.Name = "btnNewCircuit";
+            this.btnNewCircuit.Size = new System.Drawing.Size(200, 40);
+            this.btnNewCircuit.TabIndex = 2;
+            this.btnNewCircuit.Text = "New Circuit";
+            this.btnNewCircuit.UseVisualStyleBackColor = false;
             // 
             // btnWireMode
             // 
@@ -188,6 +193,7 @@ namespace EngineeringTools
             this.btnWireMode.TabIndex = 3;
             this.btnWireMode.Text = "Wire Mode";
             this.btnWireMode.UseVisualStyleBackColor = true;
+            this.btnWireMode.Click += new System.EventHandler(this.btnWireMode_Click);
             // 
             // panelSideMenu
             // 
@@ -279,7 +285,6 @@ namespace EngineeringTools
             this.btnNOT.TabIndex = 7;
             this.btnNOT.Text = "NOT";
             this.btnNOT.UseVisualStyleBackColor = false;
-            this.btnNOT.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnSwitch
             // 
