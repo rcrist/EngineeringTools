@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using EngineeringTools.Components;
+using EngineeringTools.Components.Digital;
 using EngineeringTools.Wires;
 
 namespace EngineeringTools
@@ -109,7 +110,6 @@ namespace EngineeringTools
                     NewPt2 = new Point(x, y);
                     NewWire.Pt2 = NewPt2;
                 }
-
                 schematicCanvas.Invalidate(); // Refresh the drawing canvas pictureBox
             }
         }
@@ -155,6 +155,41 @@ namespace EngineeringTools
         private void btnWireMode_Click(object sender, EventArgs e)
         {
             lineDrawing = !lineDrawing;
+        }
+
+        private void btnAND_Click(object sender, EventArgs e)
+        {
+            AND and = new AND();
+            comps.Add(and);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnOR_Click(object sender, EventArgs e)
+        {
+            OR or = new OR();
+            comps.Add(or);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnNOT_Click(object sender, EventArgs e)
+        {
+            NOT not = new NOT();
+            comps.Add(not);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnSwitch_Click(object sender, EventArgs e)
+        {
+            Components.Digital.Switch sw = new Components.Digital.Switch();
+            comps.Add(sw);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnLED_Click(object sender, EventArgs e)
+        {
+            LED led = new LED();
+            comps.Add(led);
+            schematicCanvas.Invalidate();
         }
 
         // ******************** Helper Methods ************************

@@ -257,6 +257,7 @@ namespace EngineeringTools
             this.btnAND.TabIndex = 9;
             this.btnAND.Text = "AND";
             this.btnAND.UseVisualStyleBackColor = false;
+            this.btnAND.Click += new System.EventHandler(this.btnAND_Click);
             // 
             // btnOR
             // 
@@ -271,6 +272,7 @@ namespace EngineeringTools
             this.btnOR.TabIndex = 8;
             this.btnOR.Text = "OR";
             this.btnOR.UseVisualStyleBackColor = false;
+            this.btnOR.Click += new System.EventHandler(this.btnOR_Click);
             // 
             // btnNOT
             // 
@@ -285,6 +287,7 @@ namespace EngineeringTools
             this.btnNOT.TabIndex = 7;
             this.btnNOT.Text = "NOT";
             this.btnNOT.UseVisualStyleBackColor = false;
+            this.btnNOT.Click += new System.EventHandler(this.btnNOT_Click);
             // 
             // btnSwitch
             // 
@@ -299,6 +302,7 @@ namespace EngineeringTools
             this.btnSwitch.TabIndex = 6;
             this.btnSwitch.Text = "Switch";
             this.btnSwitch.UseVisualStyleBackColor = false;
+            this.btnSwitch.Click += new System.EventHandler(this.btnSwitch_Click);
             // 
             // btnLED
             // 
@@ -313,6 +317,7 @@ namespace EngineeringTools
             this.btnLED.TabIndex = 10;
             this.btnLED.Text = "LED";
             this.btnLED.UseVisualStyleBackColor = false;
+            this.btnLED.Click += new System.EventHandler(this.btnLED_Click);
             // 
             // EngineeringToolsMainForm
             // 

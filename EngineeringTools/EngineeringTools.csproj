@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Comp.cs" />
+    <Compile Include="Components\Digital\AND.cs" />
+    <Compile Include="Components\Digital\DigComp.cs" />
+    <Compile Include="Components\Digital\LED.cs" />
+    <Compile Include="Components\Digital\NOT.cs" />
+    <Compile Include="Components\Digital\OR.cs" />
+    <Compile Include="Components\Digital\Switch.cs" />
     <Compile Include="EngineeringToolsMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,7 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Circuits\" />
-    <Folder Include="Components\Digital\" />
     <Folder Include="Helper\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
