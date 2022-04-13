@@ -11,8 +11,8 @@ namespace EngineeringTools.Components.Digital
         protected Pen offPen = new Pen(Color.White); // Color for logic 0
 
         // Logical model input and output pins
-        protected bool[] Pin = { false, false };
-        protected bool Pout = false;
+        public bool[] Pin = { false, false };
+        public bool Pout = false;
 
         public DigComp()
         {

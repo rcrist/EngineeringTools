@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using EngineeringTools.Circuits;
 using EngineeringTools.Components;
 using EngineeringTools.Components.Digital;
 using EngineeringTools.Wires;
@@ -15,8 +16,8 @@ namespace EngineeringTools
         // The grid spacing.
         public const int grid_gap = 10;
 
-        // Create a component list
-        List<Comp> comps = new List<Comp>();
+        // Create a circuit
+        Circuit schematic = new Circuit();
 
         // Mouse event attributes
         bool isMouseDown = false;
@@ -36,9 +37,15 @@ namespace EngineeringTools
         // ******************** schematicCanvas Paint and Resize Event Handlers ************************
         private void schematicCanvas_Paint(object sender, PaintEventArgs e)
         {
-            foreach (Comp comp in comps)
+            foreach (Comp comp in schematic.comps)
             {
                 comp.Draw(e.Graphics);
+
+                foreach (Wire wire in comp.wires)
+                {
+                    Wire tempWire = wire;
+                    tempWire.Draw(e.Graphics);
+                }
             }
         }
 
@@ -50,42 +57,82 @@ namespace EngineeringTools
         // ******************** schematicCanvas Mouse Event Handlers ************************
         private void schematicCanvas_MouseDown(object sender, MouseEventArgs e)
         {
-            isMouseDown = true;
-
-            // Snap the start point to the Grid
-            int x = e.X;
-            int y = e.Y;
-            SnapToGrid(ref x, ref y);
-            NewPt1.X = x;
-            NewPt1.Y = y;
-
-            if (!lineDrawing)
+            switch (e.Button)
             {
-                // Iterate over the component list and test each to see if it is "hit"
-                foreach (Comp comp in comps)
-                {
-                    if (hitTest(comp))
+                case MouseButtons.Left:
                     {
-                        tempComp = comp;
-                        offset.X = NewPt1.X - comp.loc.X;
-                        offset.Y = NewPt1.Y - comp.loc.Y;
+                        isMouseDown = true;
+
+                        // Snap the start point to the Grid
+                        int x = e.X;
+                        int y = e.Y;
+                        SnapToGrid(ref x, ref y);
+                        NewPt1.X = x;
+                        NewPt1.Y = y;
+
+                        if (!lineDrawing)
+                        {
+                            // Iterate over the component list and test each to see if it is "hit"
+                            foreach (Comp comp in schematic.comps)
+                            {
+                                if (hitTest(comp))
+                                {
+                                    tempComp = comp;
+                                    offset.X = NewPt1.X - comp.loc.X;
+                                    offset.Y = NewPt1.Y - comp.loc.Y;
+                                }
+                            }
+                        }
+                        if (lineDrawing)
+                        {
+                            // Snap the line end point to the Grid
+                            NewPt2 = new Point(x, y);
+
+                            // Create a new wire and add it to the schematic wires list
+                            NewWire = new Wire(); // Use the constructor with no parameters
+                            NewWire.Pt1 = NewPt1;
+                            NewWire.Pt2 = NewPt2;
+                            NewWire.endcapsVisible = true;
+                            schematic.comps.Add(NewWire);
+
+                            // Debugs to show the line points on the console
+                            Debug.WriteLine("Line Start Points: (" + NewPt1.X + ", " + NewPt1.Y + " )");
+
+                            // Iterate over the schematic component list and draw each component
+                            foreach (DigComp comp in schematic.comps)
+                            {
+                                if (hitTest(comp))
+                                {
+                                    Debug.WriteLine("Start Component hit!" + comp.ToString());
+                                    NewWire.inComp = comp;
+                                    comp.wires.Add(NewWire);
+                                }
+                            }
+                        }
+                        break;
                     }
-                }
-            }
-            if (lineDrawing)
-            {
-                // Snap the line end point to the Grid
-                NewPt2 = new Point(x, y);
+                case MouseButtons.Right:
+                    {
+                        foreach (Comp comp in schematic.comps)
+                        {
+                            if (comp is Components.Digital.Switch)
+                            {
+                                NewPt1.X = e.X;
+                                NewPt1.Y = e.Y;
 
-                // Create a new wire and add it to the schematic wires list
-                NewWire = new Wire(); // Use the constructor with no parameters
-                NewWire.Pt1 = NewPt1;
-                NewWire.Pt2 = NewPt2;
-                NewWire.endcapsVisible = true;
-                comps.Add(NewWire);
-
-                // Debugs to show the line points on the console
-                Debug.WriteLine("Line Start Points: (" + NewPt1.X + ", " + NewPt1.Y + " )");
+                                if (swHitTest(comp))
+                                {
+                                    Components.Digital.Switch tempSw = comp as Components.Digital.Switch;
+                                    tempSw.ToggleSwitchState();
+                                    schematic.Traverse(tempSw);
+                                    schematicCanvas.Invalidate(); // Refresh the drawing canvas pictureBox
+                                }
+                            }
+                        }
+                        break;
+                    }
+                default:
+                        break;
             }
         }
 
@@ -126,6 +173,21 @@ namespace EngineeringTools
                 SnapToGrid(ref x, ref y);
                 NewPt1.Y = y;
 
+                // Iterate over the schematic component list and draw each component
+                foreach (DigComp comp in schematic.comps)
+                {
+                    if (hitTest(comp))
+                    {
+                        Debug.WriteLine("End Component hit! " + comp.ToString());
+                        NewWire.outComp = comp;
+
+                        if ((int)NewPt1.Y == (int)comp.loc.Y + 20 || (int)NewPt1.Y == (int)comp.loc.Y + 30)
+                            NewWire.outCompPin = 0;
+                        else if ((int)NewPt1.Y == (int)comp.loc.Y + 40)
+                            NewWire.outCompPin = 1;
+                    }
+                }
+
                 // Update the new wire end points
                 NewWire.Pt2 = NewPt2;
                 NewWire.endcapsVisible = false;
@@ -160,35 +222,35 @@ namespace EngineeringTools
         private void btnAND_Click(object sender, EventArgs e)
         {
             AND and = new AND();
-            comps.Add(and);
+            schematic.comps.Add(and);
             schematicCanvas.Invalidate();
         }
 
         private void btnOR_Click(object sender, EventArgs e)
         {
             OR or = new OR();
-            comps.Add(or);
+            schematic.comps.Add(or);
             schematicCanvas.Invalidate();
         }
 
         private void btnNOT_Click(object sender, EventArgs e)
         {
             NOT not = new NOT();
-            comps.Add(not);
+            schematic.comps.Add(not);
             schematicCanvas.Invalidate();
         }
 
         private void btnSwitch_Click(object sender, EventArgs e)
         {
             Components.Digital.Switch sw = new Components.Digital.Switch();
-            comps.Add(sw);
+            schematic.comps.Add(sw);
             schematicCanvas.Invalidate();
         }
 
         private void btnLED_Click(object sender, EventArgs e)
         {
             LED led = new LED();
-            comps.Add(led);
+            schematic.comps.Add(led);
             schematicCanvas.Invalidate();
         }
 
@@ -230,6 +292,28 @@ namespace EngineeringTools
                 Debug.WriteLine("No Hit!");
                 hit = false;
             }
+            return hit;
+        }
+
+        private bool swHitTest(Comp comp)
+        {
+            bool hit;
+
+            hit = false;
+            if (NewPt1.X >= comp.loc.X + 10 && NewPt1.X <= comp.loc.X + comp.width - 10)
+            {
+                if (NewPt1.Y >= comp.loc.Y + 20 && NewPt1.Y <= comp.loc.Y + comp.height - 20)
+                {
+                    Debug.WriteLine("Switch Hit!");
+                    hit = true;
+                }
+            }
+            else
+            {
+                Debug.WriteLine("No Switch Hit!");
+                hit = false;
+            }
+
             return hit;
         }
     }

@@ -5,22 +5,22 @@ using System.Diagnostics;
 using System.Drawing;
 
 // Engineering Tools class libraries
-using EngineeringTools.Components;
-using EngineeringTools.Components.Digital;
+using TestDigitalSimulator.Components;
 
-namespace EngineeringTools.Wires
+namespace TestDigitalSimulator.Wires
 {
     public class Wire : Comp
     {
         // Create wire start and end points
         public Point Pt1 = new Point();
+        public int inCompPout;              // Variable to store Pout of the component on the imput of wire
         public Point Pt2 = new Point();
         public int outCompPin;              // Variable to store Pin of the component on the output of wire
 
 
         // Store the input and output components connected to the wire
-        public DigComp inComp = new DigComp();    // Variable to store the component on the input side of the wire
-        public DigComp outComp = new DigComp();   // Variable to store the component on the output side of the wire
+        public Comp inComp = new Comp();    // Variable to store the component on the input side of the wire
+        public Comp outComp = new Comp();   // Variable to store the component on the output side of the wire
 
         public bool logicState = false;
 
