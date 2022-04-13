@@ -61,8 +61,8 @@ namespace DigitalSim.Components
             {
                 // Draw hot spot for output pin
                 Rectangle rect1 = new Rectangle(
-                     (int)Location.X + 60 - endcap_radius, (int)Location.Y + 20 - endcap_radius,
-                     2 * endcap_radius, 2 * endcap_radius);
+                        (int)Location.X + 60 - endcap_radius, (int)Location.Y + 20 - endcap_radius,
+                        2 * endcap_radius, 2 * endcap_radius);
                 gr.DrawRectangle(Pens.Red, rect1);     // Rectangular hot spot
             }
         }
