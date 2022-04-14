@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E6E7CA76-E08F-4A84-AF11-EB8447B4E5AD}</ProjectGuid>
+    <ProjectGuid>{33F0839E-3F7B-4A0A-BBF5-2CF55BB8FF87}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MicrowaveTools</RootNamespace>
     <AssemblyName>MicrowaveTools</AssemblyName>
