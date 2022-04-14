@@ -106,6 +106,7 @@ namespace MicrowaveTools
             this.btnCircuit.Text = "Circuit";
             this.btnCircuit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCircuit.UseVisualStyleBackColor = true;
+            this.btnCircuit.Click += new System.EventHandler(this.btnCircuit_Click);
             // 
             // panelCircuitSubmenu
             // 
@@ -246,6 +247,7 @@ namespace MicrowaveTools
             this.btnLumped.TabIndex = 11;
             this.btnLumped.Text = "Lumped";
             this.btnLumped.UseVisualStyleBackColor = true;
+            this.btnLumped.Click += new System.EventHandler(this.btnLumped_Click);
             // 
             // btnIdeal
             // 
@@ -261,6 +263,7 @@ namespace MicrowaveTools
             this.btnIdeal.TabIndex = 12;
             this.btnIdeal.Text = "Ideal";
             this.btnIdeal.UseVisualStyleBackColor = true;
+            this.btnIdeal.Click += new System.EventHandler(this.btnIdeal_Click);
             // 
             // btnMicrostrip
             // 
@@ -276,6 +279,7 @@ namespace MicrowaveTools
             this.btnMicrostrip.TabIndex = 13;
             this.btnMicrostrip.Text = "Microstrip";
             this.btnMicrostrip.UseVisualStyleBackColor = true;
+            this.btnMicrostrip.Click += new System.EventHandler(this.btnMicrostrip_Click);
             // 
             // btnRLC
             // 
@@ -301,6 +305,7 @@ namespace MicrowaveTools
             this.schematicCanvas.Size = new System.Drawing.Size(902, 713);
             this.schematicCanvas.TabIndex = 3;
             this.schematicCanvas.TabStop = false;
+            this.schematicCanvas.Visible = false;
             // 
             // panelLumpedSubmenu
             // 
@@ -312,6 +317,7 @@ namespace MicrowaveTools
             this.panelLumpedSubmenu.Name = "panelLumpedSubmenu";
             this.panelLumpedSubmenu.Size = new System.Drawing.Size(140, 165);
             this.panelLumpedSubmenu.TabIndex = 4;
+            this.panelLumpedSubmenu.Visible = false;
             // 
             // btnRES
             // 
@@ -377,6 +383,7 @@ namespace MicrowaveTools
             this.panelIdealSubmenu.Name = "panelIdealSubmenu";
             this.panelIdealSubmenu.Size = new System.Drawing.Size(140, 166);
             this.panelIdealSubmenu.TabIndex = 14;
+            this.panelIdealSubmenu.Visible = false;
             // 
             // btnInPort
             // 
@@ -442,6 +449,7 @@ namespace MicrowaveTools
             this.panelMicrostripSubmenu.Name = "panelMicrostripSubmenu";
             this.panelMicrostripSubmenu.Size = new System.Drawing.Size(140, 165);
             this.panelMicrostripSubmenu.TabIndex = 15;
+            this.panelMicrostripSubmenu.Visible = false;
             // 
             // btnMLIN
             // 
