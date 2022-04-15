@@ -1,17 +1,22 @@
-﻿using System;
+﻿// C# Libraries
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+
+// Microwave Tools Libraries
+using MicrowaveTools.Circuits;
+using MicrowaveTools.Components;
+using MicrowaveTools.Components.Lumped;
 
 namespace MicrowaveTools
 {
     public partial class MainForm : Form
     {
+        private Circuit ckt = new Circuit();
+
         public MainForm()
         {
             InitializeComponent();
@@ -67,6 +72,38 @@ namespace MicrowaveTools
                 panelIdealSubmenu.Visible = false;
                 panelMicrostripSubmenu.Visible = false;
             }
+        }
+
+        private void schematicCanvas_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            foreach (Comp comp in ckt.comps)
+            {
+                comp.Draw(e.Graphics);
+                schematicCanvas.Invalidate();
+            }
+        }
+
+        private void btnRES_Click(object sender, EventArgs e)
+        {
+            RES res = new RES(75.0f, new Point(200, 300), new int[] { 0, 0 });
+            ckt.comps.Add(res);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnIND_Click(object sender, EventArgs e)
+        {
+            IND ind = new IND(5.0f, new Point(300, 300), new int[] { 0, 0 });
+            ckt.comps.Add(ind);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnCAP_Click(object sender, EventArgs e)
+        {
+            CAP cap = new CAP(1.0f, new Point(400, 300), new int[] { 0, 0 });
+            ckt.comps.Add(cap);
+            schematicCanvas.Invalidate();
         }
     }
 }

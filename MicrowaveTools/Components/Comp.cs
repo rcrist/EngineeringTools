@@ -129,6 +129,20 @@ namespace MicrowaveTools.Components
             }
         }
 
+        // Protected variables - available to derived subclasses
+        protected int compSize = 60;
+        protected int halfCompSize = 30;
+        protected int leadL = 10;  // Length of input and output leads
+        protected int bodyL = 40;  // Length of the component body (without leads)
+        protected int compL = 60;  // Length of the component with leads
+
+        // public variables
+        public Point Pin;
+        public Point Pout;
+
+        //Components draw variables
+        public Pen drawPen = new Pen(Color.White);
+
         // Polymorphism: Virtual methods used in circuit component iteration
         public virtual void print() { /* Do noting */ }
         public virtual void Draw(Graphics gr) { /* Do noting */ }

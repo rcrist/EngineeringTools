@@ -305,7 +305,7 @@ namespace MicrowaveTools
             this.schematicCanvas.Size = new System.Drawing.Size(902, 713);
             this.schematicCanvas.TabIndex = 3;
             this.schematicCanvas.TabStop = false;
-            this.schematicCanvas.Visible = false;
+            this.schematicCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.schematicCanvas_Paint);
             // 
             // panelLumpedSubmenu
             // 
@@ -336,6 +336,7 @@ namespace MicrowaveTools
             this.btnRES.Text = "RES";
             this.btnRES.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRES.UseVisualStyleBackColor = false;
+            this.btnRES.Click += new System.EventHandler(this.btnRES_Click);
             // 
             // btnIND
             // 
@@ -354,6 +355,7 @@ namespace MicrowaveTools
             this.btnIND.Text = "IND";
             this.btnIND.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnIND.UseVisualStyleBackColor = false;
+            this.btnIND.Click += new System.EventHandler(this.btnIND_Click);
             // 
             // btnCAP
             // 
@@ -372,6 +374,7 @@ namespace MicrowaveTools
             this.btnCAP.Text = "CAP";
             this.btnCAP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCAP.UseVisualStyleBackColor = false;
+            this.btnCAP.Click += new System.EventHandler(this.btnCAP_Click);
             // 
             // panelIdealSubmenu
             // 

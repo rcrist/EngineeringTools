@@ -48,6 +48,9 @@
   <ItemGroup>
     <Compile Include="Circuits\Circuit.cs" />
     <Compile Include="Components\Comp.cs" />
+    <Compile Include="Components\Lumped\CAP.cs" />
+    <Compile Include="Components\Lumped\IND.cs" />
+    <Compile Include="Components\Lumped\RES.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,7 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\Ideal\" />
-    <Folder Include="Components\Lumped\" />
     <Folder Include="Components\Microstrip\" />
     <Folder Include="Wires\" />
   </ItemGroup>
