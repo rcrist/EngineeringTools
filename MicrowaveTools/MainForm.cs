@@ -20,6 +20,9 @@ namespace MicrowaveTools
     {
         private Circuit ckt = new Circuit();
 
+        // The grid spacing.
+        public const int grid_gap = 10;
+
         public MainForm()
         {
             InitializeComponent();
@@ -184,6 +187,28 @@ namespace MicrowaveTools
             Wire w4 = new Wire(cap, pout); ckt.comps.Add(w4);
 
             schematicCanvas.Invalidate();
+        }
+
+        // Draw the background grid as a Bitmap
+        private void DrawBackgroundGrid()
+        {
+            Bitmap bm = new Bitmap(
+                schematicCanvas.ClientSize.Width,
+                schematicCanvas.ClientSize.Height);
+            for (int x = 0; x < schematicCanvas.ClientSize.Width; x += grid_gap)
+            {
+                for (int y = 0; y < schematicCanvas.ClientSize.Height; y += grid_gap)
+                {
+                    bm.SetPixel(x, y, Color.DarkGray);
+                }
+            }
+
+            schematicCanvas.BackgroundImage = bm;
+        }
+
+        private void schematicCanvas_Resize(object sender, EventArgs e)
+        {
+            DrawBackgroundGrid();
         }
     }
 }

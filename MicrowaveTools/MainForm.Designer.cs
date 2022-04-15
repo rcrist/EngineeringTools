@@ -307,6 +307,7 @@ namespace MicrowaveTools
             this.schematicCanvas.TabIndex = 3;
             this.schematicCanvas.TabStop = false;
             this.schematicCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.schematicCanvas_Paint);
+            this.schematicCanvas.Resize += new System.EventHandler(this.schematicCanvas_Resize);
             // 
             // panelLumpedSubmenu
             // 
