@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -46,6 +47,11 @@ namespace MicrowaveTools.Components.Ideal
             gr.DrawLine(drawPen, p3, p4);
             gr.DrawLine(drawPen, p5, p6);
             gr.DrawLine(drawPen, p7, p8);
+        }
+
+        public override void print()
+        {
+            Debug.WriteLine("Type: " + this.Type);
         }
     }
 }

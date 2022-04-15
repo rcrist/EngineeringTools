@@ -11,6 +11,7 @@ using MicrowaveTools.Circuits;
 using MicrowaveTools.Components;
 using MicrowaveTools.Components.Ideal;
 using MicrowaveTools.Components.Lumped;
+using MicrowaveTools.Components.Microstrip;
 
 namespace MicrowaveTools
 {
@@ -125,6 +126,27 @@ namespace MicrowaveTools
         {
             Ground gnd = new Ground();
             ckt.comps.Add(gnd);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnMLIN_Click(object sender, EventArgs e)
+        {
+            MLIN mlin = new MLIN(75.0f, new Point(200, 300), new int[] { 0, 0 });
+            ckt.comps.Add(mlin);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnMCROS_Click(object sender, EventArgs e)
+        {
+            MCROS mcros = new MCROS(100.0f, new Point(300, 300), new int[] { 0, 0 });
+            ckt.comps.Add(mcros);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnMTEE_Click(object sender, EventArgs e)
+        {
+            MTEE mtee = new MTEE(100.0f, new Point(400, 300), new int[] { 0, 0 });
+            ckt.comps.Add(mtee);
             schematicCanvas.Invalidate();
         }
     }

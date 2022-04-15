@@ -474,6 +474,7 @@ namespace MicrowaveTools
             this.btnMLIN.Text = "MLIN";
             this.btnMLIN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMLIN.UseVisualStyleBackColor = false;
+            this.btnMLIN.Click += new System.EventHandler(this.btnMLIN_Click);
             // 
             // btnMCROS
             // 
@@ -492,6 +493,7 @@ namespace MicrowaveTools
             this.btnMCROS.Text = "MCROS";
             this.btnMCROS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMCROS.UseVisualStyleBackColor = false;
+            this.btnMCROS.Click += new System.EventHandler(this.btnMCROS_Click);
             // 
             // btnMTEE
             // 
@@ -510,6 +512,7 @@ namespace MicrowaveTools
             this.btnMTEE.Text = "MTEE";
             this.btnMTEE.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMTEE.UseVisualStyleBackColor = false;
+            this.btnMTEE.Click += new System.EventHandler(this.btnMTEE_Click);
             // 
             // MainForm
             // 
