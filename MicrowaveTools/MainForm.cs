@@ -9,6 +9,7 @@ using System.Windows.Forms;
 // Microwave Tools Libraries
 using MicrowaveTools.Circuits;
 using MicrowaveTools.Components;
+using MicrowaveTools.Components.Ideal;
 using MicrowaveTools.Components.Lumped;
 
 namespace MicrowaveTools
@@ -103,6 +104,27 @@ namespace MicrowaveTools
         {
             CAP cap = new CAP(1.0f, new Point(400, 300), new int[] { 0, 0 });
             ckt.comps.Add(cap);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnInPort_Click(object sender, EventArgs e)
+        {
+            InPort pin = new InPort(50.0f, new Point(300, 300), new int[] { 0, 0 });
+            ckt.comps.Add(pin);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnOutPort_Click(object sender, EventArgs e)
+        {
+            OutPort pout = new OutPort(50.0f, new Point(500, 300), new int[] { 0, 0 });
+            ckt.comps.Add(pout);
+            schematicCanvas.Invalidate();
+        }
+
+        private void btnGround_Click(object sender, EventArgs e)
+        {
+            Ground gnd = new Ground();
+            ckt.comps.Add(gnd);
             schematicCanvas.Invalidate();
         }
     }

@@ -405,6 +405,7 @@ namespace MicrowaveTools
             this.btnInPort.Text = "InPort";
             this.btnInPort.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnInPort.UseVisualStyleBackColor = false;
+            this.btnInPort.Click += new System.EventHandler(this.btnInPort_Click);
             // 
             // btnOutPort
             // 
@@ -423,6 +424,7 @@ namespace MicrowaveTools
             this.btnOutPort.Text = "OutPort";
             this.btnOutPort.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOutPort.UseVisualStyleBackColor = false;
+            this.btnOutPort.Click += new System.EventHandler(this.btnOutPort_Click);
             // 
             // btnGround
             // 
@@ -441,6 +443,7 @@ namespace MicrowaveTools
             this.btnGround.Text = "Ground";
             this.btnGround.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGround.UseVisualStyleBackColor = false;
+            this.btnGround.Click += new System.EventHandler(this.btnGround_Click);
             // 
             // panelMicrostripSubmenu
             // 
