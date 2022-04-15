@@ -51,6 +51,7 @@
     <Compile Include="Components\Ideal\Ground.cs" />
     <Compile Include="Components\Ideal\InPort.cs" />
     <Compile Include="Components\Ideal\OutPort.cs" />
+    <Compile Include="Components\LED.cs" />
     <Compile Include="Components\Lumped\CAP.cs" />
     <Compile Include="Components\Lumped\IND.cs" />
     <Compile Include="Components\Lumped\RES.cs" />

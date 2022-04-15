@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MicrowaveTools.Wires;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -14,8 +15,8 @@ namespace MicrowaveTools.Components
         protected float _value;
         protected Point _loc;
         protected int[] _nodes;
-        protected int _width;
-        protected int _height;
+        protected int _width = 60;
+        protected int _height = 40;
 
         // Orientation property with category attribute and description attribute added   
         [CategoryAttribute("Location Settings"), DescriptionAttribute("Orientation of the Component")]
@@ -137,6 +138,7 @@ namespace MicrowaveTools.Components
         protected int compL = 60;  // Length of the component with leads
 
         // public variables
+        public List<Wire> wires = new List<Wire>();
         public Point Pin;
         public Point Pout;
 

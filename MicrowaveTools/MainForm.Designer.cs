@@ -203,6 +203,7 @@ namespace MicrowaveTools
             this.btnWireMode.Text = "Wire Mode";
             this.btnWireMode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnWireMode.UseVisualStyleBackColor = true;
+            this.btnWireMode.Click += new System.EventHandler(this.btnWireMode_Click);
             // 
             // propertyGrid
             // 
@@ -307,6 +308,9 @@ namespace MicrowaveTools
             this.schematicCanvas.TabIndex = 3;
             this.schematicCanvas.TabStop = false;
             this.schematicCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.schematicCanvas_Paint);
+            this.schematicCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseDown);
+            this.schematicCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseMove);
+            this.schematicCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseUp);
             this.schematicCanvas.Resize += new System.EventHandler(this.schematicCanvas_Resize);
             // 
             // panelLumpedSubmenu
@@ -533,6 +537,7 @@ namespace MicrowaveTools
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Microwave Tools";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
             this.panelMainMenu.ResumeLayout(false);
             this.panelCircuitSubmenu.ResumeLayout(false);
             this.panelCompMenu.ResumeLayout(false);
