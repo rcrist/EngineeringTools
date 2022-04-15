@@ -295,6 +295,7 @@ namespace MicrowaveTools
             this.btnRLC.TabIndex = 14;
             this.btnRLC.Text = "RLC";
             this.btnRLC.UseVisualStyleBackColor = true;
+            this.btnRLC.Click += new System.EventHandler(this.btnRLC_Click);
             // 
             // schematicCanvas
             // 
