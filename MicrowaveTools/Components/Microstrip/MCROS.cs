@@ -8,18 +8,20 @@ namespace MicrowaveTools.Components.Microstrip
 {
     public class MCROS : Comp
     {
+        Point[] p = new Point[21];
+
         public MCROS()
         {
 
         }
 
-        public MCROS(float length, Point location, int[] nodes)
+        public MCROS(float value, Point location, int[] nodes)
         {
 
             Type = "MCROSS";
             Loc = location;
             Nodes = nodes;
-            Value = length;
+            Value = value;
             Pout = Loc;
 
             // Print a debug message on the output console
@@ -29,7 +31,6 @@ namespace MicrowaveTools.Components.Microstrip
         // Let the MCROS draw itself called from the canvas paint event
         public override void Draw(Graphics gr)
         {
-            Point[] p = new Point[21];
             p[1] = Loc;            // Assume p1 is the input lead to the left
             p[2] = new Point(p[1].X + 10, p[1].Y);
             p[3] = new Point(p[2].X, p[2].Y - 10);
@@ -56,6 +57,11 @@ namespace MicrowaveTools.Components.Microstrip
             gr.DrawLine(drawPen, p[14], p[2]);
             for (int i = 15; i < 21; i += 2)
                 gr.DrawLine(drawPen, p[i], p[i + 1]);
+
+            // Draw the component text
+            compText = "W = " + this.Value + " mils";
+            pt = new Point(Loc.X + 45, Loc.Y - 27);
+            drawCompText(gr, pt, compText);
         }
 
         public override void print()

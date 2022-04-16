@@ -276,6 +276,13 @@ namespace MicrowaveTools
             panelCircuitSubmenu.Visible = !panelCircuitSubmenu.Visible;
         }
 
+        private void btnWireMode_Click(object sender, EventArgs e)
+        {
+            lineDrawing = !lineDrawing;
+            led.logicState = lineDrawing;
+            schematicCanvas.Invalidate();
+        }
+
         #endregion // Main_Menu_Button_Handlers
 
         #region Comp_Menu_Button_Handlers
@@ -342,21 +349,21 @@ namespace MicrowaveTools
 
         private void btnMLIN_Click(object sender, EventArgs e)
         {
-            MLIN mlin = new MLIN(75.0f, new Point(200, 300), new int[] { 0, 0 });
+            MLIN mlin = new MLIN(20.0f, new Point(200, 300), new int[] { 0, 0 });
             ckt.comps.Add(mlin);
             schematicCanvas.Invalidate();
         }
 
         private void btnMCROS_Click(object sender, EventArgs e)
         {
-            MCROS mcros = new MCROS(100.0f, new Point(300, 300), new int[] { 0, 0 });
+            MCROS mcros = new MCROS(20.0f, new Point(300, 300), new int[] { 0, 0 });
             ckt.comps.Add(mcros);
             schematicCanvas.Invalidate();
         }
 
         private void btnMTEE_Click(object sender, EventArgs e)
         {
-            MTEE mtee = new MTEE(100.0f, new Point(400, 300), new int[] { 0, 0 });
+            MTEE mtee = new MTEE(20.0f, new Point(400, 300), new int[] { 0, 0 });
             ckt.comps.Add(mtee);
             schematicCanvas.Invalidate();
         }
@@ -396,12 +403,6 @@ namespace MicrowaveTools
             schematicCanvas.Invalidate();
         }
 
-        private void btnWireMode_Click(object sender, EventArgs e)
-        {
-            lineDrawing = !lineDrawing;
-            led.logicState = lineDrawing;
-            schematicCanvas.Invalidate();
-        }
         #endregion // Comp_Menu_Button_Handlers
 
         #region Helper_Methods
@@ -422,7 +423,6 @@ namespace MicrowaveTools
             schematicCanvas.BackgroundImage = bm;
         }
 
-        // Snap XY point to the grid
         private void SnapToGrid(ref int x, ref int y)
         {
             //if (!chkSnapToGrid.Checked) return;

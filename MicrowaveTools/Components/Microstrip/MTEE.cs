@@ -13,10 +13,11 @@ namespace MicrowaveTools.Components.Microstrip
 
         }
 
-        public MTEE(float length, Point location, int[] nodes)
+        public MTEE(float value, Point location, int[] nodes)
         {
             Type = "MTEE";
             Orientation = "Series";
+            Value = value;
             Loc = location;
             Nodes = nodes;
             Pout = Loc;
@@ -50,6 +51,11 @@ namespace MicrowaveTools.Components.Microstrip
             gr.DrawLine(drawPen, p[14], p[2]);
             for (int i = 15; i < 19; i += 2)
                 gr.DrawLine(drawPen, p[i], p[i + 1]);
+
+            // Draw the component text
+            compText = "W = " + this.Value + " mils";
+            pt = new Point(Loc.X + 45, Loc.Y - 27);
+            drawCompText(gr, pt, compText);
         }
 
         public override void print()

@@ -43,6 +43,11 @@ namespace MicrowaveTools.Components.Lumped
             // Draw the input and output leads
             gr.DrawLine(drawPen, Loc.X, Loc.Y, Loc.X + 2 * leadL + 5, Loc.Y);                   // Input lead
             gr.DrawLine(drawPen, Loc.X + 3 * leadL, Loc.Y, Loc.X + compL, Loc.Y);   // Output lead
+
+            // Draw the component text
+            compText = "C = " + this.Value + "pF";
+            pt = new Point(Loc.X + 5, Loc.Y - 35);
+            drawCompText(gr, pt, compText);
         }
 
         public override void print()

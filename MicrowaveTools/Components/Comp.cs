@@ -145,8 +145,28 @@ namespace MicrowaveTools.Components
         //Components draw variables
         public Pen drawPen = new Pen(Color.White);
 
+        // Component text variables
+        // Create font and brush.
+        private Font drawFont = new Font("Arial", 10);
+        private SolidBrush drawBrush = new SolidBrush(Color.White);
+        private StringFormat drawFormat = new StringFormat();
+
+        // Component text variables
+        protected String compText;
+        protected Point pt;
+
         // Polymorphism: Virtual methods used in circuit component iteration
         public virtual void print() { /* Do noting */ }
         public virtual void Draw(Graphics gr) { /* Do noting */ }
+
+        public virtual void drawCompText(Graphics gr, Point p1, String drawString)
+        {
+            // Convert Point ints to floats
+            float x = p1.X;
+            float y = p1.Y;
+
+            // Draw string to screen.
+            gr.DrawString(drawString, drawFont, drawBrush, x, y, drawFormat);
+        }
     }
 }

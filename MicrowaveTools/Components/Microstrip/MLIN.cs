@@ -38,6 +38,10 @@ namespace MicrowaveTools.Components.Microstrip
             gr.DrawLine(drawPen, p4, p5);
             gr.DrawRectangle(drawPen, p3.X, p3.Y, 40, 20);
 
+            // Draw the component text
+            compText = "W = " + this.Value + " mils";
+            pt = new Point(Loc.X, Loc.Y - 35);
+            drawCompText(gr, pt, compText);
         }
 
         public override void print()

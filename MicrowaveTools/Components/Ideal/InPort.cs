@@ -42,6 +42,11 @@ namespace MicrowaveTools.Components.Ideal
             gr.DrawLine(drawPen, p5, p6);
 
             gr.DrawLine(drawPen, p6, p2);
+
+            // Draw the component text
+            compText = "Pin";
+            pt = new Point(Loc.X - 50, Loc.Y - 35);
+            drawCompText(gr, pt, compText);
         }
 
         public override void print()
