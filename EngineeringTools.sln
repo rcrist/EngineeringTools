@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalSim", "DigitalSim\Di
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrowaveTools", "MicrowaveTools\MicrowaveTools.csproj", "{33F0839E-3F7B-4A0A-BBF5-2CF55BB8FF87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRotation", "..\..\MicrowaveTools\TestRotation\TestRotation.csproj", "{ED01F092-ADB5-48CB-B03E-1E0239C15113}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{33F0839E-3F7B-4A0A-BBF5-2CF55BB8FF87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33F0839E-3F7B-4A0A-BBF5-2CF55BB8FF87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33F0839E-3F7B-4A0A-BBF5-2CF55BB8FF87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED01F092-ADB5-48CB-B03E-1E0239C15113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED01F092-ADB5-48CB-B03E-1E0239C15113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED01F092-ADB5-48CB-B03E-1E0239C15113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED01F092-ADB5-48CB-B03E-1E0239C15113}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
