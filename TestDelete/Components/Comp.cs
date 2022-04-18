@@ -5,9 +5,9 @@ using System.ComponentModel;
 using System.Drawing;
 
 // Microwave Tools Libraries
-using MicrowaveTools.Wires;
+using TestDelete.Wires;
 
-namespace MicrowaveTools.Components
+namespace TestDelete.Components
 {
     public class Comp
     {
@@ -145,13 +145,22 @@ namespace MicrowaveTools.Components
         public Point Pin;
         public Point Pout;
 
+
+        // End caps variables
+        protected const int endcap_radius = 3;
+        protected bool endcapsVisible = false;
+
+        // Selection flag
+        public bool isSelected = false;
+
         //Components draw variables
-        public Pen drawPen = new Pen(Color.White);
+        public Pen drawPen = new Pen(Color.Black);
+        public Pen selectPen = new Pen(Color.Red);
 
         // Component text variables
         // Create font and brush.
         private Font drawFont = new Font("Arial", 10);
-        private SolidBrush drawBrush = new SolidBrush(Color.White);
+        private SolidBrush drawBrush = new SolidBrush(Color.Black);
         private StringFormat drawFormat = new StringFormat();
 
         // Component text variables
@@ -170,6 +179,25 @@ namespace MicrowaveTools.Components
 
             // Draw string to screen.
             gr.DrawString(drawString, drawFont, drawBrush, x, y, drawFormat);
+        }
+
+        public void checkSelect()
+        {
+            if (this.isSelected)
+                this.drawPen = new Pen(Color.Red);
+            else
+                this.drawPen = new Pen(Color.Black);
+        }
+
+        public void drawSelectRect(Graphics gr, Point p1)
+        {
+            if (this.isSelected)
+            {
+                Rectangle rect1 = new Rectangle(
+                     p1.X - endcap_radius, p1.Y - endcap_radius,
+                     2 * endcap_radius, 2 * endcap_radius);
+                gr.DrawRectangle(Pens.Red, rect1);     // Rectangular end cap
+            }
         }
     }
 }

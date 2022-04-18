@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 
-namespace MicrowaveTools.Components.Ideal
+namespace TestDelete.Components.Ideal
 {
     public class OutPort : Comp
     {
@@ -22,12 +22,15 @@ namespace MicrowaveTools.Components.Ideal
             Pin = Loc;
 
             // Print a debug message on the output console
-            print();
+            //print();
         }
 
         // Let the InPort draw itself called from the canvas paint event
         public override void Draw(Graphics gr)
         {
+            checkSelect();
+            drawSelectRect(gr, Loc);
+
             Point p1 = Loc;             // Assume p1 is the end of the lead at the output of Pin
             Point p2 = new Point(p1.X + leadL, p1.Y);
             Point p3 = new Point(p2.X + 10, p2.Y - 10);
