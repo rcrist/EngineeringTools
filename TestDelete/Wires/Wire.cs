@@ -26,7 +26,6 @@ namespace TestDelete.Wires
 
         public Wire(Comp cin, Comp cout)
         {
-            Type = "Wire";
             Cin = cin;
             Cout = cout;
 
@@ -41,6 +40,8 @@ namespace TestDelete.Wires
             Height = Math.Abs(Pt2.Y - Pt1.Y);
             if (Height == 0)
                 Height = 10;
+
+            boundBox = new Rectangle(Pt1.X, Pt1.Y, Width, Height);
         }
 
         public override void Draw(Graphics gr)

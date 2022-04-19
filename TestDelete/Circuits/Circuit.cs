@@ -7,7 +7,7 @@ using TestDelete.Components;
 
 namespace TestDelete.Circuits
 {
-    class Circuit
+    public class Circuit
     {
         public List<Comp> comps = new List<Comp>();
     }

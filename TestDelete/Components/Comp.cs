@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 
 // Microwave Tools Libraries
@@ -11,127 +12,31 @@ namespace TestDelete.Components
 {
     public class Comp
     {
-        // Protected property variables for Property Grid
-        protected String _orientation = "Series";
-        protected String _type;
-        protected String _name;
-        protected float _value;
-        protected Point _loc;
-        protected int[] _nodes;
-        protected int _width = 60;
-        protected int _height = 40;
+        // Component location, rotation, and size variables
+        public Point Loc;
+        public double Value;
+        public float angle = 0.0F;
+        public int Width, Height;
 
-        // Orientation property with category attribute and description attribute added   
-        [CategoryAttribute("Location Settings"), DescriptionAttribute("Orientation of the Component")]
-        public string Orientation
-        {
-            get
-            {
-                return _orientation;
-            }
-            set
-            {
-                _orientation = value;
-            }
-        }
+        // Component rotation flag
+        public bool isRotated = false;
 
-        // Location property with category attribute and description attribute added   
-        [CategoryAttribute("Location Settings"), DescriptionAttribute("Orientation of the Component")]
-        public Point Loc
-        {
-            get
-            {
-                return _loc;
-            }
-            set
-            {
-                _loc = value;
-            }
-        }
+        // Component bounding box for hit test
+        public Rectangle boundBox = new Rectangle();
 
-        // Width property with category attribute and description attribute added   
-        [CategoryAttribute("Location Settings"), DescriptionAttribute("Orientation of the Component")]
-        public int Width
-        {
-            get
-            {
-                return _width;
-            }
-            set
-            {
-                _width = value;
-            }
-        }
+        // Component pens
+        protected Pen drawPen = new Pen(Color.Black, 1);
+        protected Pen redPen = new Pen(Color.Red, 1);
 
-        // Location property with category attribute and description attribute added   
-        [CategoryAttribute("Location Settings"), DescriptionAttribute("Orientation of the Component")]
-        public int Height
-        {
-            get
-            {
-                return _height;
-            }
-            set
-            {
-                _height = value;
-            }
-        }
+        // Component String variables
+        protected FontFamily family = new FontFamily("Arial");
+        protected int fontStyle = (int)FontStyle.Regular;
+        protected int emSize = 12;
+        protected StringFormat format = StringFormat.GenericDefault;
 
-        // Value property with category attribute and description attribute added   
-        [CategoryAttribute("Configuration Settings"), DescriptionAttribute("Configuration of the Component")]
-        public float Value
-        {
-            get
-            {
-                return _value;
-            }
-            set
-            {
-                _value = value;
-            }
-        }
-
-        // Type property with category attribute and description attribute added   
-        [CategoryAttribute("Configuration Settings"), DescriptionAttribute("Configuration of the Component")]
-        public string Type
-        {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                _type = value;
-            }
-        }
-
-        // Type property with category attribute and description attribute added   
-        [CategoryAttribute("Configuration Settings"), DescriptionAttribute("Configuration of the Component")]
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
-        }
-
-        // Type property with category attribute and description attribute added   
-        [CategoryAttribute("Configuration Settings"), DescriptionAttribute("Configuration of the Component")]
-        public int[] Nodes
-        {
-            get
-            {
-                return _nodes;
-            }
-            set
-            {
-                _nodes = value;
-            }
-        }
+        // Component text variables
+        protected String compText;
+        protected Point pt;
 
         // Protected variables - available to derived subclasses
         protected int compSize = 60;
@@ -145,7 +50,6 @@ namespace TestDelete.Components
         public Point Pin;
         public Point Pout;
 
-
         // End caps variables
         protected const int endcap_radius = 3;
         protected bool endcapsVisible = false;
@@ -153,45 +57,26 @@ namespace TestDelete.Components
         // Selection flag
         public bool isSelected = false;
 
-        //Components draw variables
-        public Pen drawPen = new Pen(Color.Black);
-        public Pen selectPen = new Pen(Color.Red);
+        // Constructors
+        public Comp()
+        {
 
-        // Component text variables
-        // Create font and brush.
-        private Font drawFont = new Font("Arial", 10);
-        private SolidBrush drawBrush = new SolidBrush(Color.Black);
-        private StringFormat drawFormat = new StringFormat();
-
-        // Component text variables
-        protected String compText;
-        protected Point pt;
+        }
 
         // Polymorphism: Virtual methods used in circuit component iteration
-        public virtual void print() { /* Do noting */ }
-        public virtual void Draw(Graphics gr) { /* Do noting */ }
-
-        public virtual void drawCompText(Graphics gr, Point p1, String drawString)
-        {
-            // Convert Point ints to floats
-            float x = p1.X;
-            float y = p1.Y;
-
-            // Draw string to screen.
-            gr.DrawString(drawString, drawFont, drawBrush, x, y, drawFormat);
-        }
+        public virtual void Draw(Graphics gr) { /* Do nothing */ }
 
         public void checkSelect()
         {
-            if (this.isSelected)
-                this.drawPen = new Pen(Color.Red);
+            if (isSelected)
+                drawPen = new Pen(Color.Red);
             else
-                this.drawPen = new Pen(Color.Black);
+                drawPen = new Pen(Color.Black);
         }
 
         public void drawSelectRect(Graphics gr, Point p1)
         {
-            if (this.isSelected)
+            if (isSelected)
             {
                 Rectangle rect1 = new Rectangle(
                      p1.X - endcap_radius, p1.Y - endcap_radius,

@@ -30,9 +30,9 @@ namespace TestDelete
         private void InitializeComponent()
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.schematicCanvas = new System.Windows.Forms.PictureBox();
             this.btnInit = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
+            this.schematicCanvas = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.schematicCanvas)).BeginInit();
             this.SuspendLayout();
@@ -47,17 +47,6 @@ namespace TestDelete
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(974, 44);
             this.flowLayoutPanel1.TabIndex = 0;
-            // 
-            // schematicCanvas
-            // 
-            this.schematicCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.schematicCanvas.Location = new System.Drawing.Point(0, 44);
-            this.schematicCanvas.Name = "schematicCanvas";
-            this.schematicCanvas.Size = new System.Drawing.Size(974, 486);
-            this.schematicCanvas.TabIndex = 1;
-            this.schematicCanvas.TabStop = false;
-            this.schematicCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.schematicCanvas_Paint);
-            this.schematicCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseDown);
             // 
             // btnInit
             // 
@@ -81,6 +70,20 @@ namespace TestDelete
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
+            // schematicCanvas
+            // 
+            this.schematicCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.schematicCanvas.Location = new System.Drawing.Point(0, 44);
+            this.schematicCanvas.Name = "schematicCanvas";
+            this.schematicCanvas.Size = new System.Drawing.Size(974, 486);
+            this.schematicCanvas.TabIndex = 1;
+            this.schematicCanvas.TabStop = false;
+            this.schematicCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.schematicCanvas_Paint);
+            this.schematicCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseDown);
+            this.schematicCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseMove);
+            this.schematicCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.schematicCanvas_MouseUp);
+            this.schematicCanvas.Resize += new System.EventHandler(this.schematicCanvas_Resize);
+            // 
             // TestDeleteMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -94,6 +97,7 @@ namespace TestDelete
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Test Delete";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TestDeleteMainForm_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TestDeleteMainForm_KeyPress);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.schematicCanvas)).EndInit();
             this.ResumeLayout(false);

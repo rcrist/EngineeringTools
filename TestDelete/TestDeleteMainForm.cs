@@ -17,9 +17,19 @@ namespace TestDelete
 {
     public partial class TestDeleteMainForm : Form
     {
-        Point hitPt;
-
         Circuit ckt = new Circuit();
+
+        // The grid spacing.
+        public const int grid_gap = 10;
+
+        List<Comp> comps = new List<Comp>();
+
+        private Point NewPt1, NewPt2, offset;
+        Comp tempComp = new Comp();
+
+        // Mouse event variables
+        bool isMouseDown = false;
+        bool lineDrawing = false;
 
         private bool isSelectMode = false;
 
@@ -30,22 +40,34 @@ namespace TestDelete
 
         private void initCkt()
         {
-            int[] nodes = new int[] { 0, 0 };
-            InPort pin = new InPort(50.0f, new Point(160, 230), nodes);
+            InPort pin = new InPort(50.0f, new Point(160, 230));
             ckt.comps.Add(pin);
 
-            nodes = new int[] { 0, 0 };
-            RES res = new RES(75.0f, new Point(200, 230), nodes);
+            RES res = new RES(75.0f, new Point(260, 230));
             ckt.comps.Add(res);
 
-            nodes = new int[] { 0, 0 };
-            OutPort pout = new OutPort(50.0f, new Point(300, 230), nodes);
+            OutPort pout = new OutPort(50.0f, new Point(360, 230));
             ckt.comps.Add(pout);
 
             Wire w1 = new Wire(pin, res);
             Wire w2 = new Wire(res, pout);
 
             schematicCanvas.Invalidate();
+        }
+
+        private void TestDeleteMainForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 114 || e.KeyChar == 82)    // 114 = r, 82 = R
+            {
+                foreach (Comp comp in ckt.comps)
+                {
+                    if (comp.isSelected)
+                    {
+                        comp.isRotated = !comp.isRotated;
+                        schematicCanvas.Invalidate();
+                    }
+                }
+            }
         }
 
         private void TestDeleteMainForm_KeyDown(object sender, KeyEventArgs e)
@@ -56,7 +78,7 @@ namespace TestDelete
             }
         }
 
-        void confirmDelete()
+        private void confirmDelete()
         {
             DialogResult res = MessageBox.Show("Are you sure you want to Delete all selected components",
                 "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
@@ -125,36 +147,131 @@ namespace TestDelete
 
         private void schematicCanvas_MouseDown(object sender, MouseEventArgs e)
         {
-            hitPt.X = e.X;
-            hitPt.Y = e.Y;
+            isMouseDown = true;
 
-            // Iterate over the schematic component list & perform hitText
-            foreach (Comp comp in ckt.comps)
+            // Snap the start point to the Grid
+            int x = e.X;
+            int y = e.Y;
+            SnapToGrid(ref x, ref y);
+            NewPt1.X = x;
+            NewPt1.Y = y;
+
+            if (!lineDrawing)
             {
-                if (hitTest(comp))
+                // Iterate over the component list and test each to see if it is "hit"
+                foreach (Comp comp in ckt.comps)
                 {
-                    if (!comp.isSelected)
-                        comp.isSelected = true;
-                    else
-                        comp.isSelected = false;
+                    if (hitTest(comp))
+                    {
+                        tempComp = comp;
+                        offset.X = NewPt1.X - comp.Loc.X;
+                        offset.Y = NewPt1.Y - comp.Loc.Y;
 
-                    schematicCanvas.Invalidate();
+                        if (isSelectMode)
+                        {
+                            if (!comp.isSelected)
+                                comp.isSelected = true;
+                            else
+                                comp.isSelected = false;
+                        }
+
+                        schematicCanvas.Invalidate();
+                    }
+
+                    foreach(Wire wire in comp.wires)
+                    {
+                        if (isSelectMode)
+                        {
+                            if (hitTest(wire))
+                            {
+                                if (!wire.isSelected)
+                                    wire.isSelected = true;
+                                else
+                                    wire.isSelected = false;
+                            }
+                        }
+
+                        schematicCanvas.Invalidate();
+                    }
                 }
             }
         }
 
+        private void schematicCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown == true)
+            {
+                int x = e.X;
+                int y = e.Y;
+                SnapToGrid(ref x, ref y);
+
+                if (!lineDrawing)
+                {
+                    if (tempComp != null)
+                    {
+                        tempComp.Loc = new Point(x - offset.X, y - offset.Y);
+                    }
+                }
+
+                schematicCanvas.Invalidate(); // Refresh the drawing canvas pictureBox
+            }
+        }
+
+        private void schematicCanvas_Resize(object sender, EventArgs e)
+        {
+            DrawBackgroundGrid();
+        }
+
+        private void schematicCanvas_MouseUp(object sender, MouseEventArgs e)
+        {
+            isMouseDown = false;
+            tempComp = null;
+        }
+
         private bool hitTest(Comp comp)
         {
+            Debug.WriteLine("Hit test on comp: " + comp.ToString() + " Loc: " + comp.Loc.ToString());
+            Debug.WriteLine("Mouse Pos: " + NewPt1.ToString());
             bool hit;
 
             hit = false;
-            if ((hitPt.X >= comp.Loc.X && hitPt.X <= comp.Loc.X + comp.Width) &&
-                (hitPt.Y >= comp.Loc.Y && hitPt.Y <= comp.Loc.Y + comp.Height))
-                    hit = true;
+            if ((NewPt1.X >= comp.boundBox.X && NewPt1.X <= comp.boundBox.X + comp.boundBox.Width) &&
+                (NewPt1.Y >= comp.boundBox.Y && NewPt1.Y <= comp.boundBox.Y + comp.boundBox.Height))
+            {
+                Debug.WriteLine("Hit!");
+                hit = true;
+            }
             else
+            {
+                Debug.WriteLine("No Hit!");
                 hit = false;
+            }
 
             return hit;
         }
+
+        private void DrawBackgroundGrid()
+        {
+            Bitmap bm = new Bitmap(
+                schematicCanvas.ClientSize.Width,
+                schematicCanvas.ClientSize.Height);
+            for (int x = 0; x < schematicCanvas.ClientSize.Width; x += grid_gap)
+            {
+                for (int y = 0; y < schematicCanvas.ClientSize.Height; y += grid_gap)
+                {
+                    bm.SetPixel(x, y, Color.Black);
+                }
+            }
+
+            schematicCanvas.BackgroundImage = bm;
+        }
+
+        private void SnapToGrid(ref int x, ref int y)
+        {
+            //if (!chkSnapToGrid.Checked) return;
+            x = grid_gap * (int)Math.Round((double)x / grid_gap);
+            y = grid_gap * (int)Math.Round((double)y / grid_gap);
+        }
+
     }
 }
