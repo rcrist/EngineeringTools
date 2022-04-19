@@ -25,24 +25,24 @@ namespace MicrowaveTools.Components.Microstrip
             print();
         }
 
-        // Let the MLIN draw itself called from the canvas paint event
-        public override void Draw(Graphics gr)
-        {
-            Point p1 = Loc;             // Assume p1 is the end of the lead at the output of Pin
-            Point p2 = new Point(p1.X + 10, p1.Y);
-            Point p3 = new Point(p2.X, p2.Y - 10); // Location of MLIN rectangle
-            Point p4 = new Point(p2.X + 40, p2.Y);
-            Point p5 = new Point(p4.X + 10, p4.Y);
+        //// Let the MLIN draw itself called from the canvas paint event
+        //public override void Draw(Graphics gr)
+        //{
+        //    Point p1 = Loc;             // Assume p1 is the end of the lead at the output of Pin
+        //    Point p2 = new Point(p1.X + 10, p1.Y);
+        //    Point p3 = new Point(p2.X, p2.Y - 10); // Location of MLIN rectangle
+        //    Point p4 = new Point(p2.X + 40, p2.Y);
+        //    Point p5 = new Point(p4.X + 10, p4.Y);
 
-            gr.DrawLine(drawPen, p1, p2);
-            gr.DrawLine(drawPen, p4, p5);
-            gr.DrawRectangle(drawPen, p3.X, p3.Y, 40, 20);
+        //    gr.DrawLine(drawPen, p1, p2);
+        //    gr.DrawLine(drawPen, p4, p5);
+        //    gr.DrawRectangle(drawPen, p3.X, p3.Y, 40, 20);
 
-            // Draw the component text
-            compText = "W = " + this.Value + " mils";
-            pt = new Point(Loc.X, Loc.Y - 35);
-            drawCompText(gr, pt, compText);
-        }
+        //    // Draw the component text
+        //    compText = "W = " + this.Value + " mils";
+        //    pt = new Point(Loc.X, Loc.Y - 35);
+        //    drawCompText(gr, pt, compText);
+        //}
 
         public override void print()
         {

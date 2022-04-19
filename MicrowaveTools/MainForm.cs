@@ -307,7 +307,7 @@ namespace MicrowaveTools
 
         private void btnRES_Click(object sender, EventArgs e)
         {
-            RES res = new RES(75.0f, new Point(200, 300), new int[] { 0, 0 });
+            RES res = new RES(75.0f, new Point(200, 100), new int[] { 0, 0 });
             ckt.comps.Add(res);
             schematicCanvas.Invalidate();
         }
@@ -460,12 +460,21 @@ namespace MicrowaveTools
 
         private bool hitTest(Comp comp)
         {
-            Debug.WriteLine("Hit test on comp: " + comp.ToString() + " Loc: " + comp.Loc.ToString());
+            // Get the path bounds for the comp graphics path
+            RectangleF boundRect = comp.gp.GetBounds();
+            //e.Graphics.DrawRectangle(new Pen(Color.Red, 1),
+            //    boundRect.X,
+            //    boundRect.Y,
+            //    boundRect.Height,
+            //    boundRect.Width);
+            Debug.WriteLine("Hit test on comp: " + comp.ToString());
+            Debug.WriteLine("Comp bounding rectangle: " + boundRect.ToString());
+            Debug.WriteLine("startX: " + startX + " startY: " + startY);
             bool hit;
 
             hit = false;
-            if ((startX >= comp.Loc.X && startX <= comp.Loc.X + comp.Width) &&
-                (startY >= comp.Loc.Y && startY <= comp.Loc.Y + comp.Height))
+            if ((startX >= boundRect.X && startX <= boundRect.X + boundRect.Width) &&
+                (startY >= boundRect.Y && startY <= boundRect.Y + boundRect.Height))
             {
                 Debug.WriteLine("Hit!");
                 hit = true;

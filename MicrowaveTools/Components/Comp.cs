@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 // Microwave Tools Libraries
 using MicrowaveTools.Wires;
@@ -150,26 +151,58 @@ namespace MicrowaveTools.Components
 
         // Component text variables
         // Create font and brush.
-        private Font drawFont = new Font("Arial", 10);
-        private SolidBrush drawBrush = new SolidBrush(Color.White);
-        private StringFormat drawFormat = new StringFormat();
+        //private Font drawFont = new Font("Arial", 10);
+        //private SolidBrush drawBrush = new SolidBrush(Color.White);
+        //private StringFormat drawFormat = new StringFormat();
+
+        // Component String variables
+        FontFamily family = new FontFamily("Arial");
+        int fontStyle = (int)FontStyle.Regular;
+        int emSize = 12;
+        StringFormat format = StringFormat.GenericDefault;
 
         // Component text variables
         protected String compText;
         protected Point pt;
 
+        // Component rotation variables
+        public GraphicsPath gp = new GraphicsPath();
+        public float angle = 0.0F;
+
         // Polymorphism: Virtual methods used in circuit component iteration
-        public virtual void print() { /* Do noting */ }
-        public virtual void Draw(Graphics gr) { /* Do noting */ }
-
-        public virtual void drawCompText(Graphics gr, Point p1, String drawString)
+        public virtual void print() { /* Do nothing */ }
+        //public virtual void Draw(Graphics gr) { /* Do nothing */ }
+        public void Draw(Graphics gr)
         {
-            // Convert Point ints to floats
-            float x = p1.X;
-            float y = p1.Y;
+            var state = gr.Save(); // Save the non-transformed state
 
+            // Rotate the path by angle deg and translate to the location
+            gr.RotateTransform(angle);
+            gr.TranslateTransform(Loc.X, Loc.Y);
+            gr.DrawPath(Pens.White, gp);
+
+            gr.Restore(state); // Restore the non-transformed state
+        }
+
+        //public virtual void drawCompText(Graphics gr, Point p1, String drawString)
+        //{
+        //    // Convert Point ints to floats
+        //    float x = p1.X;
+        //    float y = p1.Y;
+
+        //    // Draw string to screen.
+        //    gr.DrawString(drawString, drawFont, drawBrush, x, y, drawFormat);
+        //}
+
+        public virtual void drawCompText(Point p1, String drawString)
+        {
             // Draw string to screen.
-            gr.DrawString(drawString, drawFont, drawBrush, x, y, drawFormat);
+            gp.AddString(drawString,
+                family,
+                fontStyle,
+                emSize,
+                p1,
+                format);
         }
     }
 }

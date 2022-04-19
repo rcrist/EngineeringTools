@@ -37,23 +37,23 @@ namespace MicrowaveTools.Wires
             Pt2 = new Point(cout.Pin.X, cin.Pout.Y);
         }
 
-        public override void Draw(Graphics gr)
-        {
-            if (Pt1.X != Pt2.X || Pt1.Y != Pt2.Y)
-            {
-                // Draw L-shaped wire
-                gr.DrawLine(drawPen, Pt1.X, Pt1.Y, Pt1.X, Pt2.Y); // Vertical line
-                gr.DrawLine(drawPen, Pt1.X, Pt2.Y, Pt2.X, Pt2.Y); // Horizontal line
-            }
-            else
-            {
-                // Draw straight wire
-                gr.DrawLine(drawPen, Pt1, Pt2);
-            }
+        //public override void Draw(Graphics gr)
+        //{
+        //    if (Pt1.X != Pt2.X || Pt1.Y != Pt2.Y)
+        //    {
+        //        // Draw L-shaped wire
+        //        gr.DrawLine(drawPen, Pt1.X, Pt1.Y, Pt1.X, Pt2.Y); // Vertical line
+        //        gr.DrawLine(drawPen, Pt1.X, Pt2.Y, Pt2.X, Pt2.Y); // Horizontal line
+        //    }
+        //    else
+        //    {
+        //        // Draw straight wire
+        //        gr.DrawLine(drawPen, Pt1, Pt2);
+        //    }
 
-            // Draw the wire end caps
-            drawEndCaps(gr);
-        }
+        //    // Draw the wire end caps
+        //    drawEndCaps(gr);
+        //}
 
         private void drawEndCaps(Graphics gr)
         {

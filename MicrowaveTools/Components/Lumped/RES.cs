@@ -22,33 +22,57 @@ namespace MicrowaveTools.Components.Lumped
             Pin = Loc;
             Pout = new Point(Loc.X + compL, Loc.Y);
 
+            initComp();
+
             // Print debug message to the output console
             print();
         }
 
         public override void print()
         {
-            Debug.WriteLine("Type: " + this.Type + " R: " + this.Value + "\t[" + this.Nodes[0] + ", " + this.Nodes[1] + "]");
+            Debug.WriteLine("Type: " + this.Type + " R: " + this.Value + " Loc: " + Loc.ToString() + " Nodes: [" + this.Nodes[0] + ", " + this.Nodes[1] + "]");
         }
 
-        public override void Draw(Graphics gr)
+        //public override void Draw(Graphics gr)
+        //{
+        //    // Draw the resistor body
+        //    for (int i = 1; i < 5; i++)
+        //    {
+        //        gr.DrawLine(drawPen, Loc.X + leadL * (i), Loc.Y, Loc.X + leadL * (i) + 3, Loc.Y - leadL);
+        //        gr.DrawLine(drawPen, Loc.X + leadL * (i) + 3, Loc.Y - leadL, Loc.X + leadL * (i) + 6, Loc.Y + leadL);
+        //        gr.DrawLine(drawPen, Loc.X + leadL * (i) + 6, Loc.Y + leadL, Loc.X + leadL * (i + 1), Loc.Y);
+        //    }
+
+        //    // Draw the input and output leads
+        //    gr.DrawLine(drawPen, Loc.X, Loc.Y, Loc.X + leadL, Loc.Y);           // Input lead
+        //    gr.DrawLine(drawPen, Loc.X + bodyL + leadL, Loc.Y, Loc.X + compL, Loc.Y);   // Output lead
+
+        //    // Draw the component text
+        //    compText = "R = " + this.Value + "Ω";
+        //    pt = new Point(Loc.X+5, Loc.Y-35);
+        //    drawCompText(gr, pt, compText);
+        //}
+
+        private void initComp()
         {
+            // Draw the input lead
+            gp.AddLine(Loc.X, Loc.Y, Loc.X + leadL, Loc.Y);
+
             // Draw the resistor body
             for (int i = 1; i < 5; i++)
             {
-                gr.DrawLine(drawPen, Loc.X + leadL * (i), Loc.Y, Loc.X + leadL * (i) + 3, Loc.Y - leadL);
-                gr.DrawLine(drawPen, Loc.X + leadL * (i) + 3, Loc.Y - leadL, Loc.X + leadL * (i) + 6, Loc.Y + leadL);
-                gr.DrawLine(drawPen, Loc.X + leadL * (i) + 6, Loc.Y + leadL, Loc.X + leadL * (i + 1), Loc.Y);
+                gp.AddLine(Loc.X + leadL * (i), Loc.Y, Loc.X + leadL * (i) + 3, Loc.Y - leadL);
+                gp.AddLine(Loc.X + leadL * (i) + 3, Loc.Y - leadL, Loc.X + leadL * (i) + 6, Loc.Y + leadL);
+                gp.AddLine(Loc.X + leadL * (i) + 6, Loc.Y + leadL, Loc.X + leadL * (i + 1), Loc.Y);
             }
 
-            // Draw the input and output leads
-            gr.DrawLine(drawPen, Loc.X, Loc.Y, Loc.X + leadL, Loc.Y);           // Input lead
-            gr.DrawLine(drawPen, Loc.X + bodyL + leadL, Loc.Y, Loc.X + compL, Loc.Y);   // Output lead
+            // Draw the output lead
+            gp.AddLine(Loc.X + bodyL + leadL, Loc.Y, Loc.X + compL, Loc.Y);
 
             // Draw the component text
             compText = "R = " + this.Value + "Ω";
-            pt = new Point(Loc.X+5, Loc.Y-35);
-            drawCompText(gr, pt, compText);
+            pt = new Point(Loc.X + 5, Loc.Y - 35);
+            drawCompText(pt, compText);
         }
     }
 }

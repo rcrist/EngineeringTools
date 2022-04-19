@@ -35,30 +35,30 @@ namespace MicrowaveTools.Components
             Pin = Loc;
         }
 
-        // Let the LED draw itself called from the canvas paint event
-        public override void Draw(Graphics gr)
-        {
-            // Draw outer circle
-            Rectangle rect = new Rectangle((int)Loc.X - 6, (int)Loc.Y - 6, 12, 12);
-            gr.FillEllipse(new SolidBrush(Color.DarkGray), rect);
+        //// Let the LED draw itself called from the canvas paint event
+        //public override void Draw(Graphics gr)
+        //{
+        //    // Draw outer circle
+        //    Rectangle rect = new Rectangle((int)Loc.X - 6, (int)Loc.Y - 6, 12, 12);
+        //    gr.FillEllipse(new SolidBrush(Color.DarkGray), rect);
 
-            // Draw inner circle = LED based on the LED state
-            if (logicState)
-            {
-                //gr.DrawLine(this.onPen, new Point((int)Loc.X, (int)Loc.Y + 20), new Point((int)Loc.X + 10, (int)Loc.Y + 20));
-                rect = new Rectangle((int)Loc.X - 4, (int)Loc.Y - 4, 8, 8);
-                gr.FillEllipse(this.onfillColor, rect);
-            }
-            else
-            {
-                //gr.DrawLine(this.offPen, new Point((int)Loc.X, (int)Loc.Y + 20), new Point((int)Loc.X + 10, (int)Loc.Y + 20));
-                rect = new Rectangle((int)Loc.X - 4, (int)Loc.Y - 4, 8, 8);
-                gr.FillEllipse(this.offfillColor, rect);
-            }
+        //    // Draw inner circle = LED based on the LED state
+        //    if (logicState)
+        //    {
+        //        //gr.DrawLine(this.onPen, new Point((int)Loc.X, (int)Loc.Y + 20), new Point((int)Loc.X + 10, (int)Loc.Y + 20));
+        //        rect = new Rectangle((int)Loc.X - 4, (int)Loc.Y - 4, 8, 8);
+        //        gr.FillEllipse(this.onfillColor, rect);
+        //    }
+        //    else
+        //    {
+        //        //gr.DrawLine(this.offPen, new Point((int)Loc.X, (int)Loc.Y + 20), new Point((int)Loc.X + 10, (int)Loc.Y + 20));
+        //        rect = new Rectangle((int)Loc.X - 4, (int)Loc.Y - 4, 8, 8);
+        //        gr.FillEllipse(this.offfillColor, rect);
+        //    }
 
-            // Add label
-            drawCompText(gr, new Point(Loc.X - 75, Loc.Y - 8), "Wire Mode");
-        }
+        //    // Add label
+        //    drawCompText(gr, new Point(Loc.X - 75, Loc.Y - 8), "Wire Mode");
+        //}
 
         public virtual void drawCompText(Graphics gr, Point p1, String drawString)
         {
