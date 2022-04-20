@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace TestStretchLInes.Components.Ideal
+namespace MicrowaveTools.Components.Ideal
 {
     public class InPort : Comp
     {

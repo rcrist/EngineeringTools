@@ -57,6 +57,7 @@ namespace MicrowaveTools
             this.btnMLIN = new System.Windows.Forms.Button();
             this.btnMCROS = new System.Windows.Forms.Button();
             this.btnMTEE = new System.Windows.Forms.Button();
+            this.btnSelect = new System.Windows.Forms.Button();
             this.panelMainMenu.SuspendLayout();
             this.panelCircuitSubmenu.SuspendLayout();
             this.panelCompMenu.SuspendLayout();
@@ -73,6 +74,7 @@ namespace MicrowaveTools
             this.panelMainMenu.Controls.Add(this.btnCircuit);
             this.panelMainMenu.Controls.Add(this.panelCircuitSubmenu);
             this.panelMainMenu.Controls.Add(this.btnWireMode);
+            this.panelMainMenu.Controls.Add(this.btnSelect);
             this.panelMainMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMainMenu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.panelMainMenu.Location = new System.Drawing.Point(0, 0);
@@ -520,6 +522,23 @@ namespace MicrowaveTools
             this.btnMTEE.UseVisualStyleBackColor = false;
             this.btnMTEE.Click += new System.EventHandler(this.btnMTEE_Click);
             // 
+            // btnSelect
+            // 
+            this.btnSelect.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.BlueViolet;
+            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelect.ForeColor = System.Drawing.Color.LightGray;
+            this.btnSelect.Location = new System.Drawing.Point(3, 275);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(145, 33);
+            this.btnSelect.TabIndex = 13;
+            this.btnSelect.Text = "Select Mode";
+            this.btnSelect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -537,6 +556,7 @@ namespace MicrowaveTools
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Microwave Tools";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TestDeleteMainForm_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
             this.panelMainMenu.ResumeLayout(false);
             this.panelCircuitSubmenu.ResumeLayout(false);
@@ -579,6 +599,7 @@ namespace MicrowaveTools
         private System.Windows.Forms.Button btnMLIN;
         private System.Windows.Forms.Button btnMCROS;
         private System.Windows.Forms.Button btnMTEE;
+        private System.Windows.Forms.Button btnSelect;
     }
 }
 

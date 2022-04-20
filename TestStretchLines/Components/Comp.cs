@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Drawing;
 
 // Microwave Tools Libraries
-using TestStretchLInes.Wires;
+using MicrowaveTools.Wires;
 
-namespace TestStretchLInes.Components
+namespace MicrowaveTools.Components
 {
     public class Comp
     {

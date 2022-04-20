@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 
 // Microwave Tools Libraries
 using MicrowaveTools.Wires;
@@ -12,127 +12,31 @@ namespace MicrowaveTools.Components
 {
     public class Comp
     {
-        // Protected property variables for Property Grid
-        protected String _orientation = "Series";
-        protected String _type;
-        protected String _name;
-        protected float _value;
-        protected Point _loc;
-        protected int[] _nodes;
-        protected int _width = 60;
-        protected int _height = 40;
+        // Component location, rotation, and size variables
+        public Point Loc;
+        public double Value;
+        public float angle = 0.0F;
+        public int Width, Height;
 
-        // Orientation property with category attribute and description attribute added   
-        [CategoryAttribute("Location Settings"), DescriptionAttribute("Orientation of the Component")]
-        public string Orientation
-        {
-            get
-            {
-                return _orientation;
-            }
-            set
-            {
-                _orientation = value;
-            }
-        }
+        // Component rotation flag
+        public bool isRotated = false;
 
-        // Location property with category attribute and description attribute added   
-        [CategoryAttribute("Location Settings"), DescriptionAttribute("Orientation of the Component")]
-        public Point Loc
-        {
-            get
-            {
-                return _loc;
-            }
-            set
-            {
-                _loc = value;
-            }
-        }
+        // Component bounding box for hit test
+        public Rectangle boundBox = new Rectangle();
 
-        // Width property with category attribute and description attribute added   
-        [CategoryAttribute("Location Settings"), DescriptionAttribute("Orientation of the Component")]
-        public int Width
-        {
-            get
-            {
-                return _width;
-            }
-            set
-            {
-                _width = value;
-            }
-        }
+        // Component pens
+        protected Pen drawPen = new Pen(Color.White, 1);
+        protected Pen redPen = new Pen(Color.Red, 1);
 
-        // Location property with category attribute and description attribute added   
-        [CategoryAttribute("Location Settings"), DescriptionAttribute("Orientation of the Component")]
-        public int Height
-        {
-            get
-            {
-                return _height;
-            }
-            set
-            {
-                _height = value;
-            }
-        }
+        // Component String variables
+        protected FontFamily family = new FontFamily("Arial");
+        protected int fontStyle = (int)FontStyle.Regular;
+        protected int emSize = 12;
+        protected StringFormat format = StringFormat.GenericDefault;
 
-        // Value property with category attribute and description attribute added   
-        [CategoryAttribute("Configuration Settings"), DescriptionAttribute("Configuration of the Component")]
-        public float Value
-        {
-            get
-            {
-                return _value;
-            }
-            set
-            {
-                _value = value;
-            }
-        }
-
-        // Type property with category attribute and description attribute added   
-        [CategoryAttribute("Configuration Settings"), DescriptionAttribute("Configuration of the Component")]
-        public string Type
-        {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                _type = value;
-            }
-        }
-
-        // Type property with category attribute and description attribute added   
-        [CategoryAttribute("Configuration Settings"), DescriptionAttribute("Configuration of the Component")]
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
-        }
-
-        // Type property with category attribute and description attribute added   
-        [CategoryAttribute("Configuration Settings"), DescriptionAttribute("Configuration of the Component")]
-        public int[] Nodes
-        {
-            get
-            {
-                return _nodes;
-            }
-            set
-            {
-                _nodes = value;
-            }
-        }
+        // Component text variables
+        protected String compText;
+        protected Point pt;
 
         // Protected variables - available to derived subclasses
         protected int compSize = 60;
@@ -146,63 +50,39 @@ namespace MicrowaveTools.Components
         public Point Pin;
         public Point Pout;
 
-        //Components draw variables
-        public Pen drawPen = new Pen(Color.White);
+        // End caps variables
+        protected const int endcap_radius = 3;
+        protected bool endcapsVisible = false;
 
-        // Component text variables
-        // Create font and brush.
-        //private Font drawFont = new Font("Arial", 10);
-        //private SolidBrush drawBrush = new SolidBrush(Color.White);
-        //private StringFormat drawFormat = new StringFormat();
+        // Selection flag
+        public bool isSelected = false;
 
-        // Component String variables
-        FontFamily family = new FontFamily("Arial");
-        int fontStyle = (int)FontStyle.Regular;
-        int emSize = 12;
-        StringFormat format = StringFormat.GenericDefault;
-
-        // Component text variables
-        protected String compText;
-        protected Point pt;
-
-        // Component rotation variables
-        public GraphicsPath gp = new GraphicsPath();
-        public float angle = 0.0F;
-
-        // Polymorphism: Virtual methods used in circuit component iteration
-        public virtual void print() { /* Do nothing */ }
-        //public virtual void Draw(Graphics gr) { /* Do nothing */ }
-        public void Draw(Graphics gr)
+        // Constructors
+        public Comp()
         {
-            var state = gr.Save(); // Save the non-transformed state
 
-            // Rotate the path by angle deg and translate to the location
-            gr.RotateTransform(angle);
-            gr.TranslateTransform(Loc.X, Loc.Y);
-            gr.DrawPath(Pens.White, gp);
-
-            gr.Restore(state); // Restore the non-transformed state
         }
 
-        //public virtual void drawCompText(Graphics gr, Point p1, String drawString)
-        //{
-        //    // Convert Point ints to floats
-        //    float x = p1.X;
-        //    float y = p1.Y;
+        // Polymorphism: Virtual methods used in circuit component iteration
+        public virtual void Draw(Graphics gr) { /* Do nothing */ }
 
-        //    // Draw string to screen.
-        //    gr.DrawString(drawString, drawFont, drawBrush, x, y, drawFormat);
-        //}
-
-        public virtual void drawCompText(Point p1, String drawString)
+        public void checkSelect()
         {
-            // Draw string to screen.
-            gp.AddString(drawString,
-                family,
-                fontStyle,
-                emSize,
-                p1,
-                format);
+            if (isSelected)
+                drawPen = new Pen(Color.Red);
+            else
+                drawPen = new Pen(Color.White);
+        }
+
+        public void drawSelectRect(Graphics gr, Point p1)
+        {
+            if (isSelected)
+            {
+                Rectangle rect1 = new Rectangle(
+                     p1.X - endcap_radius, p1.Y - endcap_radius,
+                     2 * endcap_radius, 2 * endcap_radius);
+                gr.DrawRectangle(Pens.Red, rect1);     // Rectangular end cap
+            }
         }
     }
 }

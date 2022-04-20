@@ -19,8 +19,6 @@ namespace MicrowaveTools.Wires
         public Comp Cin = new Comp();
         public Comp Cout = new Comp();
 
-        // End caps variables
-        private const int endcap_radius = 3;
         public bool endcapsVisible = false;
 
         public Wire()
@@ -33,31 +31,43 @@ namespace MicrowaveTools.Wires
             Cin = cin;
             Cout = cout;
 
+            Cin.wires.Add(this);
+
             Pt1 = new Point(cin.Pout.X, cin.Pout.Y);
             Pt2 = new Point(cout.Pin.X, cin.Pout.Y);
+
+            Loc = Pt1;
+
+            Width = Math.Abs(Pt2.X - Pt1.X);
+            Height = Math.Abs(Pt2.Y - Pt1.Y);
+            if (Height == 0)
+                Height = 10;
+
+            boundBox = new Rectangle(Pt1.X, Pt1.Y, Width, Height);
         }
 
-        //public override void Draw(Graphics gr)
-        //{
-        //    if (Pt1.X != Pt2.X || Pt1.Y != Pt2.Y)
-        //    {
-        //        // Draw L-shaped wire
-        //        gr.DrawLine(drawPen, Pt1.X, Pt1.Y, Pt1.X, Pt2.Y); // Vertical line
-        //        gr.DrawLine(drawPen, Pt1.X, Pt2.Y, Pt2.X, Pt2.Y); // Horizontal line
-        //    }
-        //    else
-        //    {
-        //        // Draw straight wire
-        //        gr.DrawLine(drawPen, Pt1, Pt2);
-        //    }
+        public override void Draw(Graphics gr)
+        {
+            // Draw the wire end caps
+            drawEndCaps(gr);
+            checkSelect();
 
-        //    // Draw the wire end caps
-        //    drawEndCaps(gr);
-        //}
+            if (Pt1.X != Pt2.X || Pt1.Y != Pt2.Y)
+            {
+                // Draw L-shaped wire
+                gr.DrawLine(drawPen, Pt1.X, Pt1.Y, Pt1.X, Pt2.Y); // Vertical line
+                gr.DrawLine(drawPen, Pt1.X, Pt2.Y, Pt2.X, Pt2.Y); // Horizontal line
+            }
+            else
+            {
+                // Draw straight wire
+                gr.DrawLine(drawPen, Pt1, Pt2);
+            }
+        }
 
         private void drawEndCaps(Graphics gr)
         {
-            if (this.endcapsVisible)
+            if (this.endcapsVisible || this.isSelected)
             {
                 // Draw custom end cap for Pt1
                 Rectangle rect1 = new Rectangle(
