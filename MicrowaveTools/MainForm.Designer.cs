@@ -38,6 +38,7 @@ namespace MicrowaveTools
             this.btnStore = new System.Windows.Forms.Button();
             this.btnAnalyze = new System.Windows.Forms.Button();
             this.btnWireMode = new System.Windows.Forms.Button();
+            this.btnSelect = new System.Windows.Forms.Button();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.panelCompMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.btnLumped = new System.Windows.Forms.Button();
@@ -57,7 +58,6 @@ namespace MicrowaveTools
             this.btnMLIN = new System.Windows.Forms.Button();
             this.btnMCROS = new System.Windows.Forms.Button();
             this.btnMTEE = new System.Windows.Forms.Button();
-            this.btnSelect = new System.Windows.Forms.Button();
             this.panelMainMenu.SuspendLayout();
             this.panelCircuitSubmenu.SuspendLayout();
             this.panelCompMenu.SuspendLayout();
@@ -189,6 +189,7 @@ namespace MicrowaveTools
             this.btnAnalyze.TabIndex = 13;
             this.btnAnalyze.Text = "Analyze";
             this.btnAnalyze.UseVisualStyleBackColor = false;
+            this.btnAnalyze.Click += new System.EventHandler(this.btnAnalyze_Click);
             // 
             // btnWireMode
             // 
@@ -206,6 +207,23 @@ namespace MicrowaveTools
             this.btnWireMode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnWireMode.UseVisualStyleBackColor = true;
             this.btnWireMode.Click += new System.EventHandler(this.btnWireMode_Click);
+            // 
+            // btnSelect
+            // 
+            this.btnSelect.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.BlueViolet;
+            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelect.ForeColor = System.Drawing.Color.LightGray;
+            this.btnSelect.Location = new System.Drawing.Point(3, 275);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(145, 33);
+            this.btnSelect.TabIndex = 13;
+            this.btnSelect.Text = "Select Mode";
+            this.btnSelect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // propertyGrid
             // 
@@ -521,23 +539,6 @@ namespace MicrowaveTools
             this.btnMTEE.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMTEE.UseVisualStyleBackColor = false;
             this.btnMTEE.Click += new System.EventHandler(this.btnMTEE_Click);
-            // 
-            // btnSelect
-            // 
-            this.btnSelect.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.BlueViolet;
-            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelect.ForeColor = System.Drawing.Color.LightGray;
-            this.btnSelect.Location = new System.Drawing.Point(3, 275);
-            this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(145, 33);
-            this.btnSelect.TabIndex = 13;
-            this.btnSelect.Text = "Select Mode";
-            this.btnSelect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSelect.UseVisualStyleBackColor = true;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // MainForm
             // 

@@ -14,6 +14,7 @@ using MicrowaveTools.Components.Ideal;
 using MicrowaveTools.Components.Lumped;
 using MicrowaveTools.Components.Microstrip;
 using MicrowaveTools.Wires;
+using static MicrowaveTools.Circuits.Circuit;
 
 namespace MicrowaveTools
 {
@@ -506,6 +507,11 @@ namespace MicrowaveTools
             //if (!chkSnapToGrid.Checked) return;
             x = grid_gap * (int)Math.Round((double)x / grid_gap);
             y = grid_gap * (int)Math.Round((double)y / grid_gap);
+        }
+
+        private void btnAnalyze_Click(object sender, EventArgs e)
+        {
+ 
         }
 
         private void closeOtherPanels(Panel thisPanel)
