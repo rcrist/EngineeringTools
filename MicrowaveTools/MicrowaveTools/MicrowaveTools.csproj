@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DCDC56F3-ED39-4B6C-B372-EBA5C8755A70}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MicrowaveTools</RootNamespace>
+    <AssemblyName>MicrowaveTools</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.5.0.0-beta01\lib\net48\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Circuits\Circuit.cs" />
+    <Compile Include="Components\Microstrip\Microstrip.cs" />
+    <Compile Include="Components\Microstrip\TransLine.cs" />
+    <Compile Include="Calculators\CompEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Calculators\CompEditDialog.Designer.cs">
+      <DependentUpon>CompEditDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Comp.cs" />
+    <Compile Include="Components\CPW\CPWGAP.cs" />
+    <Compile Include="Components\CPW\CPWLIN.cs" />
+    <Compile Include="Components\CPW\CPWOPEN.cs" />
+    <Compile Include="Components\CPW\CPWSHORT.cs" />
+    <Compile Include="Components\CPW\CPWSTEP.cs" />
+    <Compile Include="Components\Ideal\Ground.cs" />
+    <Compile Include="Components\Ideal\InPort.cs" />
+    <Compile Include="Components\Ideal\OutPort.cs" />
+    <Compile Include="Components\Ideal\TLOC.cs" />
+    <Compile Include="Components\Ideal\STLSC.cs" />
+    <Compile Include="Components\Ideal\TLIN.cs" />
+    <Compile Include="Components\Lumped\Capacitor.cs" />
+    <Compile Include="Components\Lumped\Inductor.cs" />
+    <Compile Include="Components\Lumped\PLC.cs" />
+    <Compile Include="Components\Lumped\PRC.cs" />
+    <Compile Include="Components\Lumped\PRL.cs" />
+    <Compile Include="Components\Lumped\PRLC.cs" />
+    <Compile Include="Components\Lumped\Resistor.cs" />
+    <Compile Include="Components\Lumped\SLC.cs" />
+    <Compile Include="Components\Lumped\SRC.cs" />
+    <Compile Include="Components\Lumped\SRL.cs" />
+    <Compile Include="Components\Lumped\SRLC.cs" />
+    <Compile Include="Components\Microstrip\MCORNERL.cs" />
+    <Compile Include="Components\Microstrip\MCORNERR.cs" />
+    <Compile Include="Components\Microstrip\MCPLIN.cs" />
+    <Compile Include="Components\Microstrip\MCROSS.cs" />
+    <Compile Include="Components\Microstrip\MGAP.cs" />
+    <Compile Include="Components\Microstrip\MLIN.cs" />
+    <Compile Include="Components\Microstrip\MMITERL.cs" />
+    <Compile Include="Components\Microstrip\MMITERR.cs" />
+    <Compile Include="Components\Microstrip\MOPEN.cs" />
+    <Compile Include="Components\Microstrip\MSTEP.cs" />
+    <Compile Include="Components\Microstrip\MTEE.cs" />
+    <Compile Include="Components\Microstrip\MVIA.cs" />
+    <Compile Include="Components\Microstrip\Substrate.cs" />
+    <Compile Include="DataDisplayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataDisplayForm.Designer.cs">
+      <DependentUpon>DataDisplayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Calculators\MicrostripCalcForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Calculators\MicrostripCalcForm.Designer.cs">
+      <DependentUpon>MicrostripCalcForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\Globals.cs" />
+    <Compile Include="Helper\Helper.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\Settings.cs" />
+    <Compile Include="Wires\Node.cs" />
+    <Compile Include="Wires\Wire.cs" />
+    <EmbeddedResource Include="Calculators\CompEditDialog.resx">
+      <DependentUpon>CompEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataDisplayForm.resx">
+      <DependentUpon>DataDisplayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Calculators\MicrostripCalcForm.resx">
+      <DependentUpon>MicrostripCalcForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
