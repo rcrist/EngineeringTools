@@ -1,8 +1,14 @@
-﻿using System;
+﻿// C# Libraries
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+
+// MathNet.Numberics Libraries
+using MathNet.Numerics;
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Complex32;
 
 namespace MicrowaveTools.Components.Lumped
 {
@@ -24,6 +30,20 @@ namespace MicrowaveTools.Components.Lumped
 
             Pin = new Point(Loc.X, Loc.Y + 30);
             Pout = new Point(Loc.X + compSize, Loc.Y + 30);
+        }
+
+        // Analysis initializer
+        public override void initComp(float f)
+        {
+            Matrix<Complex32> Yres = Matrix<Complex32>.Build.Dense(2, 2);
+            Yres[0, 0] = 1;
+            Yres[0, 1] = -1;
+            Yres[1, 0] = -1;
+            Yres[1, 1] = 1;
+
+            Yres = Yres / (float)this.Value; // Won't work with a double, must be a float
+            Y = Yres;
+            N = new int[] { 0, 0 };
         }
 
         public override void Draw(Graphics gr)
@@ -62,7 +82,7 @@ namespace MicrowaveTools.Components.Lumped
 
             // Rotate the component by angle deg
             PointF rotatePoint = new PointF(Loc.X + 30, Loc.Y + 30); // Rotate about component center point
-            Matrix myMatrix = new Matrix();
+            System.Drawing.Drawing2D.Matrix myMatrix = new System.Drawing.Drawing2D.Matrix();
             myMatrix.RotateAt(angle, rotatePoint, MatrixOrder.Append);
             gr.Transform = myMatrix;
 
@@ -76,6 +96,11 @@ namespace MicrowaveTools.Components.Lumped
             //gr.DrawRectangle(redPen, boundBox);
 
             gp.Dispose();
+        }
+
+        public override void print()
+        {
+            Debug.WriteLine("Type: RES  R: " + this.Value + "\t[" + this.N[0] + ", " + this.N[1] + "]");
         }
     }
 }

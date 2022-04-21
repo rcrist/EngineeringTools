@@ -8,6 +8,11 @@ using System.Drawing;
 // Microwave Tools Libraries
 using MicrowaveTools.Wires;
 
+// MathNet.Numberics Libraries
+using MathNet.Numerics;
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Complex32;
+
 namespace MicrowaveTools.Components
 {
     public class Comp
@@ -56,6 +61,12 @@ namespace MicrowaveTools.Components
 
         // Selection flag
         public bool isSelected = false;
+
+        // Analysis variables
+        public Matrix<Complex32> Y;
+        public int[] N;
+        public virtual void initComp(float f) { /* Do noting */ }
+        public virtual void print() { /* Do noting */ }
 
         // Constructors
         public Comp()
